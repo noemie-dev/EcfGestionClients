@@ -1,7 +1,7 @@
 package entities;
 
 public class Client extends Societe {
-    int compteurIdClient;
+    private static int compteurIdClient = 1;
     long chiffreAffaires;
     int nbrEmployes;
 
@@ -9,8 +9,9 @@ public class Client extends Societe {
     public Client() {
     }
 
-    public Client(int id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire, long chiffreAffaires, int nbrEmployes) {
+    public Client( int id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire, long chiffreAffaires, int nbrEmployes) {
         super(id, raisonSociale, adresse, telephone, email, commentaire);
+        setId(compteurIdClient++); // lors de l'instanciation d'un nouvel objet client, l'id actuel est attribué, puis incrémenté pour le suivant.
         setChiffreAffaires(chiffreAffaires);
         setNbrEmployes(nbrEmployes);
     }
