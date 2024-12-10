@@ -1,12 +1,15 @@
 package entities;
 
+import static utilities.Regex.PATTERN_TELEPHONE;
+import static utilities.Regex.PATTERN_EMAIL;
+
 public abstract class Societe {
     private int id; // identifiant de la société
     private String raisonSociale;
     private Adresse adresse;
     private String telephone;
     private String email;
-    private String commentaire;
+    private String commentaire = " ";
 
     // rétablissement du constructeur implicite
 
@@ -15,7 +18,7 @@ public abstract class Societe {
 
     // constructeur avec tous les paramètres
 
-    public Societe(int id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire) {
+    public Societe(int id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire) throws NullPointerException, SaisieException {
         setId(id);
         setRaisonSociale(raisonSociale);
         setAdresse(adresse);
@@ -38,7 +41,10 @@ public abstract class Societe {
         return raisonSociale;
     }
 
-    public void setRaisonSociale(String raisonSociale) {
+    public void setRaisonSociale(String raisonSociale) throws NullPointerException {
+        if (raisonSociale == null || raisonSociale.trim().isEmpty()) {
+            throw new NullPointerException();
+        }
         this.raisonSociale = raisonSociale;
     }
 
@@ -46,7 +52,10 @@ public abstract class Societe {
         return adresse;
     }
 
-    public void setAdresse(Adresse adresse) {
+    public void setAdresse(Adresse adresse) throws NullPointerException {
+        if (adresse == null) {
+            throw new NullPointerException();
+        }
         this.adresse = adresse;
     }
 
@@ -54,16 +63,32 @@ public abstract class Societe {
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setTelephone(String telephone) throws NullPointerException, SaisieException {
+        if (telephone == null || telephone.trim().isEmpty()) {
+            throw new NullPointerException();
+        }
+        if (PATTERN_TELEPHONE.matcher(telephone).matches()) {
+            this.telephone = telephone;
+        }
+        else {
+            throw new SaisieException("Erreur : Telephone invalide");
+        }
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email) throws NullPointerException, SaisieException {
+        if (email == null || email.trim().isEmpty()) {
+            throw new NullPointerException();
+        }
+        if (PATTERN_EMAIL.matcher(email).matches()) {
+            this.email = email;
+        }
+        else
+        {throw new SaisieException( "Erreur : Email invalide");
+        };
     }
 
     public String getCommentaire() {
@@ -71,7 +96,11 @@ public abstract class Societe {
     }
 
     public void setCommentaire(String commentaire) {
-        this.commentaire = commentaire;
+        if (commentaire == null || commentaire.trim().isEmpty()) {
+            this.commentaire = " ";
+        }
+        else this.commentaire = commentaire;
+       ;
     }
 
     // methode ToString pour afficher les variables contenues dans l'objet
