@@ -1,7 +1,4 @@
-import entities.Adresse;
-import entities.Client;
-import entities.Prospect;
-import entities.SaisieException;
+import entities.*;
 import gestionlog.LoggerInit;
 
 import java.io.IOException;
@@ -39,6 +36,10 @@ public class Main {
             System.out.println(client);
             System.out.println(prospect);
             System.out.println(prospect2);
+
+            Clients.clients.add(client);
+            Clients.clients.add(client2);
+            Prospects.prospects.add(prospect);
 
         }
         catch (NullPointerException e) {
