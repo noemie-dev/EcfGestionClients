@@ -44,6 +44,7 @@ public abstract class Societe {
     public void setRaisonSociale(String raisonSociale) throws NullPointerException {
         if (raisonSociale == null || raisonSociale.trim().isEmpty()) {
             throw new NullPointerException();
+            // dans méthode à part : ! renvoie un boolean : recup liste client et prospect, puis .stream // fluidifie recherche enfasiant srting avec tableau, .anymatch pour tout chercher, .equalsignorecase fait en sorte d'ignorer la casse
         }
         this.raisonSociale = raisonSociale;
     }
@@ -96,11 +97,7 @@ public abstract class Societe {
     }
 
     public void setCommentaire(String commentaire) {
-        if (commentaire == null || commentaire.trim().isEmpty()) {
-            this.commentaire = " ";
-        }
-        else this.commentaire = commentaire;
-       ;
+        this.commentaire = commentaire;
     }
 
     // methode ToString pour afficher les variables contenues dans l'objet

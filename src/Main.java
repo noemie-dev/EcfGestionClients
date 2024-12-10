@@ -2,6 +2,7 @@ import entities.*;
 import gestionlog.LoggerInit;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.logging.Level;
 
 import static gestionlog.LoggerInit.LOGGER;
@@ -44,6 +45,10 @@ public class Main {
         }
         catch (NullPointerException e) {
             System.out.println(e.getMessage());}
+
+        catch (DateTimeException e) {
+            System.out.println(e.getMessage());
+        }
         catch (SaisieException e) {
             System.out.println(e.getMessage());
         }

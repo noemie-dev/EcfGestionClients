@@ -1,6 +1,7 @@
 package entities;
 
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import utilities.OuiNon;
@@ -10,7 +11,6 @@ public class Prospect extends Societe {
     private static int compteurIdProspect = 1;
     String dateProspect;
     LocalDate dateProspection;
-    String interetProspect;
     private OuiNon reponseInteret;
 
     public Prospect() {
@@ -20,27 +20,46 @@ public class Prospect extends Societe {
         super(id, raisonSociale, adresse, telephone, email, commentaire);
         setId(compteurIdProspect++);
         setDateProspection(dateProspect);
-        /*setInteretProspect(reponseInteret);*/
+        System.out.println(dateProspect);
         setInteretProspect(interetProspect);
+        System.out.println(interetProspect);
     }
 
     public LocalDate getDateProspection() {
         return dateProspection;
     }
 
-    public void setDateProspection(String dateProspect) {
-        this.dateProspection = LocalDate.parse(dateProspect, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    public void setDateProspection(String dateProspect) throws SaisieException {
+        try {
+            this.dateProspection = LocalDate.parse(dateProspect, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeException e) {
+            throw new SaisieException(e.getMessage());
+        }
     }
 
     public OuiNon getInteretProspect() {
         return reponseInteret;
     }
 
-    /*public void setInteretProspect(OuiNon reponseInteret) {
-        this.reponseInteret = OuiNon.valueOf(interetProspect.toUpperCase());
-        }*/
-    public void setInteretProspect(String interetProspect) {
-        this.interetProspect = interetProspect;
+    // si dans mon enum oui non il y a la meme valeur que dans mon string interetprospect, alors je l'assigne dans ma propriété reponseInteret
+
+    public void setInteretProspect(String interetProspect) throws SaisieException {
+        try {
+            this.reponseInteret = OuiNon.valueOf(interetProspect.toUpperCase());
+        }
+        catch (IllegalArgumentException e) {
+            throw new SaisieException(e.getMessage());
+        }
+
     }
 
+    @Override
+    public String toString() {
+        return "Prospect{" +
+                super.toString() +
+                "dateProspect='" + dateProspect + '\'' +
+                ", dateProspection=" + dateProspection +
+                ", reponseInteret=" + reponseInteret +
+                '}';
+    }
 }
