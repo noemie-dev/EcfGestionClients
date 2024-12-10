@@ -2,12 +2,30 @@ import entities.Adresse;
 import entities.Client;
 import entities.Prospect;
 import entities.SaisieException;
+import gestionlog.LoggerInit;
+
+import java.io.IOException;
+import java.util.logging.Level;
+
+import static gestionlog.LoggerInit.LOGGER;
 
 
 public class Main {
     public static void main(String[] args) throws NullPointerException, SaisieException {
         System.out.println("Hello, World!");
+
+        try {
+            new LoggerInit().initFileLogger();
+            LOGGER.log(Level.INFO, "Lancement de l'application");
+        } catch (IOException e) {
+            System.out.println("Erreur lors de l'initialisation du logger : " + e.getMessage());
+            System.exit(1);
+        }
+
         remplissage();
+
+        LOGGER.log(Level.INFO, "Fermeture de l'application");
+        System.exit(0);
 
         }
     public static void remplissage() {
