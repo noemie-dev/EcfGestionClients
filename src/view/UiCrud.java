@@ -16,8 +16,8 @@ public class UiCrud extends JFrame {
     private JTextField villeTextField;
     private JTextField telephoneTextField;
     private JTextField emailTextField;
-    private JTextField textField10;
-    private JTextField textField11;
+    private JTextField chiffreAffairetextField;
+    private JTextField nbEmployesTextField;
     private JButton crudValiderButton;
     private JTextArea CommTextArea;
     private JLabel emptyLabel;
@@ -33,8 +33,12 @@ public class UiCrud extends JFrame {
     private JLabel telephoneLabel;
     private JLabel mailLabel;
     private JTabbedPane titreCrudPanel;
-    private JLabel labelField10;
-    private JLabel labelField11;
+    private JLabel chiffreAffairesLabel;
+    private JLabel nombreEmployesLabel;
+    private JTextField dateProspectTextField;
+    private JTextField interetProspectTextField;
+    private JLabel interetProspectLabel;
+    private JLabel dateProspectLabel;
 
     public UiCrud() {
         setContentPane(contentPane);
