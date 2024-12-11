@@ -42,6 +42,6 @@ public class Client extends Societe {
 
 
     public String toString() {
-        return super.toString()+"chiffre d'affaires :"+chiffreAffaires+"nombre employés" +nbrEmployes;
+        return "Client{"+super.toString()+"chiffre d'affaires :"+chiffreAffaires+"nombre employés" +nbrEmployes;
     }
 }

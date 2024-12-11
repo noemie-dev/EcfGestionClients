@@ -1,5 +1,6 @@
 package entities;
 
+import static entities.Clients.clients;
 import static utilities.Regex.PATTERN_TELEPHONE;
 import static utilities.Regex.PATTERN_EMAIL;
 
@@ -41,12 +42,16 @@ public abstract class Societe {
         return raisonSociale;
     }
 
-    public void setRaisonSociale(String raisonSociale) throws NullPointerException {
+    public void setRaisonSociale(String raisonSociale) throws NullPointerException, SaisieException {
         if (raisonSociale == null || raisonSociale.trim().isEmpty()) {
             throw new NullPointerException();
-            // dans méthode à part : ! renvoie un boolean : recup liste client et prospect, puis .stream // fluidifie recherche enfasiant srting avec tableau, .anymatch pour tout chercher, .equalsignorecase fait en sorte d'ignorer la casse
+            // dans méthode à part : ! renvoie un boolean : recup liste client et prospect, puis .stream // fluidifie recherche en faisant sorting avec tableau, .anymatch pour tout chercher, .equalsignorecase fait en sorte d'ignorer la casse
         }
-        this.raisonSociale = raisonSociale;
+        if (clients.contains(raisonSociale)) {
+            throw new SaisieException("Erreur : cette r  aison sociale existe déjà");
+
+        }
+        else this.raisonSociale = raisonSociale;
     }
 
     public Adresse getAdresse() {
@@ -113,4 +118,6 @@ public abstract class Societe {
                 ", commentaire='" + commentaire + '\'' +
                 '}';
     }
+
+
 }

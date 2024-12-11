@@ -20,9 +20,8 @@ public class Prospect extends Societe {
         super(id, raisonSociale, adresse, telephone, email, commentaire);
         setId(compteurIdProspect++);
         setDateProspection(dateProspect);
-        System.out.println(dateProspect);
         setInteretProspect(interetProspect);
-        System.out.println(interetProspect);
+
     }
 
     public LocalDate getDateProspection() {

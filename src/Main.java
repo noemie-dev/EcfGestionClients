@@ -41,7 +41,9 @@ public class Main {
             Clients.clients.add(client);
             Clients.clients.add(client2);
             Prospects.prospects.add(prospect);
-
+            Client client1 = new Client(0,"apple", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", 5454, 55);
+            Clients.clients.add(client1);
+            System.out.println(Clients.clients);
         }
         catch (NullPointerException e) {
             System.out.println(e.getMessage());}
