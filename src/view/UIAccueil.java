@@ -11,13 +11,19 @@ public class UIAccueil extends JFrame {
     private JPanel modifPanel;
     private JButton clientButton;
     private JButton prospectButton;
-    private JLabel clientProspectButton;
+    private JLabel infoAccueilLabel;
     private JButton creerButton;
     private JButton modifierButton;
     private JButton supprimerButton;
     private JButton afficherListeButton;
     private JComboBox comboBox1;
     private JButton validerButton;
+    private JLabel infoCrudLabel;
+    private JLabel choixCrudLabel;
+    private JLabel ClassChoisieCrudLabel;
+    private JLabel crudChoisiModifLabel;
+    private JLabel ClasseChoisieModifLabel;
+    private JLabel infoModifLabel;
 
     public UIAccueil() {
         initComponents();
@@ -67,5 +73,9 @@ public class UIAccueil extends JFrame {
         this.setSize(600, 600);
         crudPanel.setVisible(false);
         modifPanel.setVisible(false);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
