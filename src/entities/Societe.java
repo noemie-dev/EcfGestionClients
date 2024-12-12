@@ -47,10 +47,10 @@ public abstract class Societe {
             // dans méthode à part : ! renvoie un boolean : recup liste client et prospect, puis .stream // fluidifie recherche en faisant sorting avec tableau, .anymatch pour tout chercher, .equalsignorecase fait en sorte d'ignorer la casse
         }
         if (RaisonSocialeClientDoublon(raisonSociale)) {
-            throw new SaisieException("Erreur : Cette raison sociale existe déjà dans nos dossiers.");
+            throw new SaisieException("Erreur : Cette raison sociale est déjà enregistrée.");
         }
         if (RaisonSocialeProspectDoublon(raisonSociale)) {
-            throw new SaisieException("Erreur : Cette raison sociale existe déjà dans nos dossiers.");
+            throw new SaisieException("Erreur : Cette raison sociale est déjà enregistrée.");
         }
         else this.raisonSociale = raisonSociale;
     }
