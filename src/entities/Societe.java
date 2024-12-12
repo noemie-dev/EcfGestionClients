@@ -1,6 +1,5 @@
 package entities;
 
-import static entities.Clients.clients;
 import static utilities.Regex.PATTERN_TELEPHONE;
 import static utilities.Regex.PATTERN_EMAIL;
 
@@ -47,9 +46,11 @@ public abstract class Societe {
             throw new NullPointerException();
             // dans méthode à part : ! renvoie un boolean : recup liste client et prospect, puis .stream // fluidifie recherche en faisant sorting avec tableau, .anymatch pour tout chercher, .equalsignorecase fait en sorte d'ignorer la casse
         }
-        if (clients.contains(raisonSociale)) {
-            throw new SaisieException("Erreur : cette r  aison sociale existe déjà");
-
+        if (RaisonSocialeClientDoublon(raisonSociale)) {
+            throw new SaisieException("Erreur : Cette raison sociale existe déjà dans nos dossiers.");
+        }
+        if (RaisonSocialeProspectDoublon(raisonSociale)) {
+            throw new SaisieException("Erreur : Cette raison sociale existe déjà dans nos dossiers.");
         }
         else this.raisonSociale = raisonSociale;
     }
@@ -104,6 +105,15 @@ public abstract class Societe {
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
     }
+
+    private boolean RaisonSocialeClientDoublon(String raisonSociale) {
+        return Clients.getClients().stream().anyMatch(client -> client.getRaisonSociale().equalsIgnoreCase(raisonSociale) && !client.equals(this));
+    }
+
+    private boolean RaisonSocialeProspectDoublon(String raisonSociale) {
+        return Prospects.getProspects().stream().anyMatch(prospect -> prospect.getRaisonSociale().equalsIgnoreCase(raisonSociale) && !prospect.equals(this));
+    }
+
 
 
 
