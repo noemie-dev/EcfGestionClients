@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.*;
 
-public class UIAccueil extends JFrame {
+public class  UIAccueil extends JFrame {
     private JPanel contentPane;
     private JButton retourButton;
     private JButton quitterButton;
