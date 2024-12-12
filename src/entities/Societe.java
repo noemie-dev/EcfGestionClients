@@ -105,6 +105,8 @@ public abstract class Societe {
         this.commentaire = commentaire;
     }
 
+
+
     // methode ToString pour afficher les variables contenues dans l'objet
 
     @Override

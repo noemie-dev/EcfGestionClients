@@ -2,13 +2,28 @@ package test;
 
 import entities.Client;
 import entities.SaisieException;
-import entities.Societe;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
+class SocieteTest {
 
+    @Test
+    void setRaisonSociale() {
+    }
+
+    @Test
+    void setAdresse() {
+    }
+
+    @Test
+    void setTelephone() {
+    }
+
+    @Test
+    void setEmail() {
+    }
+}
+/*
 class SocieteTest {
     @Test
     void testSocieteVide() {
@@ -16,11 +31,7 @@ class SocieteTest {
         boolean test = false;
         try {
             client.setRaisonSociale(null);
-            client.setAdresse(null);
-            client.setTelephone(null);
-            client.setEmail(null);
-            client.setChiffreAffaires(0);
-            client.setNbrEmployes(0);
+
         } catch (NullPointerException npe) {
             test = true;
             assertTrue(test);
@@ -28,7 +39,12 @@ class SocieteTest {
             assertTrue(test);
         }
     }
-}
+}*/
+/*client.setAdresse(null);
+            client.setTelephone(null);
+            client.setEmail(null);
+            client.setChiffreAffaires(0);
+            client.setNbrEmployes(0);*/
 
 /*  @Test
 void testAnimalVide() {

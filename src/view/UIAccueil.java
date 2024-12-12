@@ -24,6 +24,7 @@ public class UIAccueil extends JFrame {
     private JLabel crudChoisiModifLabel;
     private JLabel ClasseChoisieModifLabel;
     private JLabel infoModifLabel;
+    private JPanel modifSuppPanel;
 
     public UIAccueil() {
         initComponents();
