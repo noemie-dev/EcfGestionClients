@@ -58,7 +58,16 @@ class AdresseTest {
     void testSetCodePostalInvalide(String invalidValue) {
         Adresse adresse = new Adresse();
         assertThrows(SaisieException.class, () -> adresse.setCodePostal(invalidValue));
+        assertThrows(NullPointerException.class, () -> adresse.setCodePostal(null));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", " "}) // Ajouter des codes postaux non valides
+    void testSetCodePostalVide(String invalidValue) {
+        Adresse adresse = new Adresse();
+        assertThrows(NullPointerException.class, () -> adresse.setCodePostal(null));
+    }
+
 
     @ParameterizedTest
     @ValueSource(strings = {"75001", "13001", "69001"}) // Ajouter des codes postaux valides
@@ -72,6 +81,7 @@ class AdresseTest {
     void testSetVilleInvalide(String invalidValue) {
         Adresse adresse = new Adresse();
         assertThrows(NullPointerException.class, () -> adresse.setVille(invalidValue));
+
     }
 
     @ParameterizedTest

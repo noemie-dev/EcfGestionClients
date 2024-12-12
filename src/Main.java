@@ -10,7 +10,6 @@ import static gestionlog.LoggerInit.LOGGER;
 
 public class Main {
     public static void main(String[] args) throws NullPointerException, SaisieException {
-        System.out.println("Hello, World!");
 
         try {
             new LoggerInit().initFileLogger();
@@ -33,17 +32,12 @@ public class Main {
             Client client2 = new Client(0, "microsoft", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", 5454, 55);
             Prospect prospect = new Prospect(0, "google", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", " ", "27/08/1995", "OUI");
             Prospect prospect2 = new Prospect(0, "linux", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", "27/08/1995", "non");
-            System.out.println(client2);
-            System.out.println(client);
-            System.out.println(prospect);
-            System.out.println(prospect2);
 
             Clients.clients.add(client);
             Clients.clients.add(client2);
             Prospects.prospects.add(prospect);
-            Client client1 = new Client(0,"apple", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", 5454, 55);
-            Clients.clients.add(client1);
-            System.out.println(Clients.clients);
+            Prospects.ajouterProspect(prospect2);
+
         }
         catch (NullPointerException e) {
             System.out.println(e.getMessage());}
