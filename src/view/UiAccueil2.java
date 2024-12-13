@@ -131,7 +131,15 @@ public class UiAccueil2 extends JFrame {
         supprimerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"supprimer");
+               choixCrud = ChoixCrud.SUPPRIMER;
+                remplirCombobox();
+                if (choixClientProspect==ChoixClientProspect.CLIENT) {
+                    classeChoisieLabel2.setText("Gestion des Clients");
+                }
+                else classeChoisieLabel2.setText("Gestion des Prospects");
+                actionChoisieLabel.setText("Supprimer");
+                modifSuppPanel.setVisible(true);
+
             }
         });
         afficherListeButton.addActionListener(new ActionListener() {
