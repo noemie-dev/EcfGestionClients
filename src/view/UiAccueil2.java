@@ -14,7 +14,6 @@ public class UiAccueil2 extends JFrame {
     private JPanel crudPanel;
     private JPanel modifSuppPanel;
     private JPanel accueilPanel;
-    private JLabel accueilChoixLabel;
     private JButton clientButton;
     private JButton prospectButton;
     private JButton creerButton;
@@ -26,6 +25,9 @@ public class UiAccueil2 extends JFrame {
     private JLabel infoModifSuppLabel;
     private JLabel classeChoisieLabel2;
     private JLabel actionChoisieLabel;
+    private JLabel infoAccueilLabel;
+    private JLabel infoActionCrudLabel;
+    private JLabel classeChoisieLabel;
     private ChoixCrud choixCrud;
     private ChoixClientProspect choixClientProspect;
 
@@ -33,6 +35,16 @@ public class UiAccueil2 extends JFrame {
         initComponents();
         listeners();
         afficherPanels();
+        clientButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choixClientProspect = ChoixClientProspect.CLIENT;
+                classeChoisieLabel.setText("Gestion des Clients");
+                crudPanel.setVisible(true);
+
+
+            }
+        });
     }
 
        /* buttonOK.addActionListener(new ActionListener() {
