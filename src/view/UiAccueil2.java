@@ -1,5 +1,8 @@
 package view;
 
+import utilities.ChoixClientProspect;
+import utilities.ChoixCrud;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -7,14 +10,32 @@ public class UiAccueil2 extends JFrame {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JPanel accueilChoixPanel;
+    private JPanel crudPanel;
+    private JPanel modifSuppPanel;
+    private JPanel accueilPanel;
+    private JLabel accueilChoixLabel;
+    private JButton clientButton;
+    private JButton prospectButton;
+    private JButton creerButton;
+    private JButton modifierButton;
+    private JButton supprimerButton;
+    private JButton afficherListeButton;
+    private JComboBox comboBox1;
+    private JButton validerButton;
+    private JLabel infoModifSuppLabel;
+    private JLabel classeChoisieLabel2;
+    private JLabel actionChoisieLabel;
+    private ChoixCrud choixCrud;
+    private ChoixClientProspect choixClientProspect;
 
     public UiAccueil2() {
-        setContentPane(contentPane);
-        getRootPane().setDefaultButton(buttonOK);
-        this.setTitle("Accueil");
-        this.setSize(900,900);
+        initComponents();
+        listeners();
+        afficherPanels();
+    }
 
-        buttonOK.addActionListener(new ActionListener() {
+       /* buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
@@ -40,7 +61,16 @@ public class UiAccueil2 extends JFrame {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-    }
+        clientButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"ok");
+                crudPanel.setVisible(true);
+            }
+        });*/
+
+
+
 
     private void onOK() {
         // add your code here
@@ -51,4 +81,46 @@ public class UiAccueil2 extends JFrame {
         // add your code here if necessary
         dispose();
     }
+
+    private void initComponents() {
+        setContentPane(contentPane);
+        getRootPane().setDefaultButton(buttonOK);
+        this.setTitle("Accueil");
+        this.setSize(900,900);
+
+    }
+
+    private void listeners() {
+        creerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"create");
+            }
+        });
+        modifierButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"modifier");
+            }
+        });
+        supprimerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"supprimer");
+            }
+        });
+        afficherListeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"afficher");
+            }
+        });
+    }
+
+    private void afficherPanels() {
+        crudPanel.setVisible(false);
+        modifSuppPanel.setVisible(false);
+    }
+
+
 }
