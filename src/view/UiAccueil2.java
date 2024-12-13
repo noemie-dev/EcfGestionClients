@@ -189,6 +189,7 @@ public class UiAccueil2 extends JFrame {
     }
 
     private void remplirCombobox() {
+        comboBox1.removeAllItems();
         if (choixClientProspect==ChoixClientProspect.CLIENT) {
             for (Client client : clients) {
                 comboBox1.addItem(client.getRaisonSociale());
