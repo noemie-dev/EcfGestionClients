@@ -52,7 +52,7 @@ public class UiCrud extends JFrame {
     private Prospect prospect;
     private ChoixClientProspect choixClientProspect;
 
-// Constructeur modifier ou supprimer un client
+    // Constructeur modifier ou supprimer un client
     public UiCrud(ChoixCrud choixCrud, Client clientChoisi) {
         initComponents();
         setTitle("Modifier un client");
@@ -95,7 +95,7 @@ public class UiCrud extends JFrame {
 
     }
 
-    private void listeners(){
+    private void listeners() {
         crudValiderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -117,6 +117,11 @@ public class UiCrud extends JFrame {
 
                         ;
                     case SUPPRIMER:
+                        try {
+                            validerSuppression();
+                        } catch (SaisieException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         ;
 
                 }
@@ -168,7 +173,7 @@ public class UiCrud extends JFrame {
     private void initComponents() {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(retourButton);
-        setSize(900,900);
+        setSize(900, 900);
     }
 
     private void labelsClientProspect() {
@@ -183,8 +188,7 @@ public class UiCrud extends JFrame {
             interetProspectLabel.setVisible(false);
 
             ouiNonCombobox.setVisible(false);
-        }
-        else {
+        } else {
             dateProspectLabel.setVisible(true);
             dateProspectTextField.setVisible(true);
             interetProspectLabel.setVisible(true);
@@ -197,20 +201,19 @@ public class UiCrud extends JFrame {
 
     }
 
-    private void initRemplissageTextField () {
+    private void initRemplissageTextField() {
         if (client != null) {
             idTextField.setText(String.valueOf(client.getId()));
             raisonSocTextField.setText(client.getRaisonSociale());
             // continuer à set les trucs dans les textfields
-        }
-        else {
+        } else {
             idTextField.setText(String.valueOf(prospect.getId()));
             raisonSocTextField.setText(prospect.getRaisonSociale());
             //same
         }
     }
 
-    private void nonEditableTextfield () {
+    private void nonEditableTextfield() {
         idTextField.setEditable(false);
         raisonSocTextField.setEditable(false);
         // same
@@ -228,8 +231,7 @@ public class UiCrud extends JFrame {
                         parseLong(chiffreAffairetextField.getText()),
                         parseInt(nbEmployesTextField.getText())
                 ));
-            }
-            else {
+            } else {
                 Prospects.getProspects().add(new Prospect(
                         raisonSocTextField.getText(),
                         new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()),
@@ -244,7 +246,7 @@ public class UiCrud extends JFrame {
             JOptionPane.showMessageDialog(null, "BIEN JOUER NONOOOOO");
 
         } catch (SaisieException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -258,8 +260,7 @@ public class UiCrud extends JFrame {
                 client.setCommentaire(commTextArea.getText());
                 client.setChiffreAffaires(parseLong(chiffreAffairetextField.getText()));
                 client.setNbrEmployes(parseInt(nbEmployesTextField.getText()));
-            }
-            else {
+            } else {
                 prospect.setRaisonSociale(raisonSocTextField.getText());
                 prospect.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()));
                 prospect.setTelephone(telephoneTextField.getText());
@@ -274,4 +275,29 @@ public class UiCrud extends JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+
+    private void validerSuppression() throws SaisieException {
+        try {
+            int confirmation = JOptionPane.showConfirmDialog(this,
+                    "etes vous sûrs de vouloir supprimer cette fiche ? ",
+                    "confirmation de suppression",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+
+            if (confirmation == JOptionPane.YES_OPTION) {
+                if (choixClientProspect == ChoixClientProspect.CLIENT) {
+                    Clients.getClients().remove(client);
+                    JOptionPane.showMessageDialog(this, "client supprimé avec succes");
+                } else {
+                    Prospects.getProspects().remove(prospect);
+                    JOptionPane.showMessageDialog(this, "prospect suprrimé");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "suppression annulee");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
