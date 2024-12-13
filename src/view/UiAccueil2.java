@@ -1,10 +1,15 @@
 package view;
 
+import entities.Client;
+import entities.Prospect;
 import utilities.ChoixClientProspect;
 import utilities.ChoixCrud;
 
 import javax.swing.*;
 import java.awt.event.*;
+
+import static entities.Clients.clients;
+import static entities.Prospects.prospects;
 
 public class UiAccueil2 extends JFrame {
     private JPanel contentPane;
@@ -112,7 +117,15 @@ public class UiAccueil2 extends JFrame {
         modifierButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"modifier");
+                choixCrud = ChoixCrud.MODIFIER;
+                remplirCombobox();
+               if (choixClientProspect==ChoixClientProspect.CLIENT) {
+                   classeChoisieLabel2.setText("Gestion des Clients");
+               }
+               else classeChoisieLabel2.setText("Gestion des Prospects");
+                actionChoisieLabel.setText("Modifier");
+                modifSuppPanel.setVisible(true);
+
             }
         });
         supprimerButton.addActionListener(new ActionListener() {
@@ -132,6 +145,19 @@ public class UiAccueil2 extends JFrame {
     private void afficherPanels() {
         crudPanel.setVisible(false);
         modifSuppPanel.setVisible(false);
+    }
+
+    private void remplirCombobox() {
+        if (choixClientProspect==ChoixClientProspect.CLIENT) {
+            for (Client client : clients) {
+                comboBox1.addItem(client.getRaisonSociale());
+            }
+        }
+        else if (choixClientProspect==ChoixClientProspect.PROSPECT) {
+            for (Prospect prospect : prospects) {
+                comboBox1.addItem(prospect.getRaisonSociale());
+            }
+        }
     }
 
 
