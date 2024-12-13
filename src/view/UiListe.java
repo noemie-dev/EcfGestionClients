@@ -3,13 +3,16 @@ package view;
 import entities.Client;
 import entities.Clients;
 import entities.Prospect;
+import entities.Prospects;
 import utilities.ChoixClientProspect;
 
 import java.awt.event.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import static entities.Clients.clients;
+import static entities.Clients.getClients;
 import static entities.Prospects.prospects;
 import static utilities.Regex.DATE_FORMATTER;
 
@@ -76,10 +79,13 @@ public class UiListe extends JFrame {
     private void remplissageJTable(ChoixClientProspect choixClientProspect) {
         DefaultTableModel modelTable ;
         String[] entete;
+        List<?> choixTriRaisonSoc;
         if (choixClientProspect == ChoixClientProspect.CLIENT) {
             entete = new String[]{"identifiant", "raison sociale", "nr rue", "nom rue", "code postal", "ville", "telephone", "mail", "CA", "nbr employés"};
             modelTable = new DefaultTableModel(new Object[][]{}, entete);
             modelTable.addRow(entete);
+
+//            choixTriRaisonSoc = Clients.triRaisonSociale();
 
             for (Client client : clients) {
                 modelTable.addRow(new Object[]{
@@ -99,6 +105,10 @@ public class UiListe extends JFrame {
             entete = new String[]{"identifiant", "raison sociale", "nr rue", "nom rue", "code postal", "ville", "telephone", "mail", "date prospection", "interêt"};
             modelTable = new DefaultTableModel(new Object[][]{}, entete);
             modelTable.addRow(entete);
+
+            // choixTriRaisonSoc = Prospects.triRaisonSociale();
+
+
             for (Prospect prospect : prospects) {
                 modelTable.addRow(new Object[]{
                         prospect.getId(),
