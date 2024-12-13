@@ -1,6 +1,6 @@
 import entities.*;
 import gestionlog.LoggerInit;
-import view.UiListe;
+import view.UiAccueil2;
 
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -19,7 +19,10 @@ public class Main {
             System.out.println("Erreur lors de l'initialisation du logger : " + e.getMessage());
             System.exit(1);
         }
-        new UiListe().setVisible(true);
+
+        UiAccueil2 uiAccueil2 = new UiAccueil2();
+        uiAccueil2.setVisible(true);
+       // new UiListe().setVisible(true);
         remplissage();
 
         LOGGER.log(Level.INFO, "Fermeture de l'application");
