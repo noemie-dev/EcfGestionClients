@@ -1,7 +1,11 @@
 package view;
 
+import entities.Client;
+import entities.Prospect;
+import utilities.ChoixClientProspect;
+import utilities.ChoixCrud;
+
 import javax.swing.*;
-import java.awt.event.*;
 
 public class UiCrud extends JFrame {
     private JPanel contentPane;
@@ -32,19 +36,70 @@ public class UiCrud extends JFrame {
     private JLabel villeLabel;
     private JLabel telephoneLabel;
     private JLabel mailLabel;
-    private JTabbedPane titreCrudPanel;
     private JLabel chiffreAffairesLabel;
-    private JLabel nombreEmployesLabel;
+    private JLabel nbEmployesLabel;
     private JTextField dateProspectTextField;
     private JTextField interetProspectTextField;
     private JLabel interetProspectLabel;
     private JLabel dateProspectLabel;
+    private ChoixCrud choixCrud;
+    private Client client;
+    private Prospect prospect;
+    private ChoixClientProspect choixClientProspect;
 
-    public UiCrud() {
-        setContentPane(contentPane);
-        getRootPane().setDefaultButton(retourButton);
+// Constructeur modifier ou supprimer un client
+    public UiCrud(ChoixCrud choixCrud, Client clientChoisi) {
+        initComponents();
+        setTitle("Modifier un client");
+        this.choixCrud = choixCrud;
+        this.client = clientChoisi;
+        labelsClientProspect();
+        initRemplissageTextField();
+        if (choixCrud == ChoixCrud.SUPPRIMER) {
+            nonEditableTextfield();
+            setTitle("Supprimer un client");
+        }
 
-        retourButton.addActionListener(new ActionListener() {
+
+
+    }
+
+    // constructeur pour modifier ou supprimer un prospect
+    public UiCrud(ChoixCrud choixCrud, Prospect prospectChoisi) {
+        initComponents();
+        setTitle("Modifier un prospect");
+        this.choixCrud = choixCrud;
+        this.prospect = prospectChoisi;
+        labelsClientProspect();
+        initRemplissageTextField();
+        if (choixCrud == ChoixCrud.SUPPRIMER) {
+            nonEditableTextfield();
+            setTitle("Supprimer un prospect");
+        }
+    }
+
+    // constructeur pour creer
+    public UiCrud(ChoixClientProspect choixClientProspect) {
+        initComponents();
+        setTitle("Créer un client");
+        this.choixClientProspect = choixClientProspect;
+        labelsClientProspect();
+        idTextField.setText(String.valueOf(Client.getCompteurIdClient())); // je recupère l'identifiant dans ma classe avec un getter static
+    }
+
+
+    private void onOK() {
+        // add your code here
+        dispose();
+    }
+
+    private void onCancel() {
+        // add your code here if necessary
+        dispose();
+    }
+
+
+    /*    retourButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
@@ -70,19 +125,52 @@ public class UiCrud extends JFrame {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }*/
+
+    private void initComponents() {
+        setContentPane(contentPane);
+        getRootPane().setDefaultButton(retourButton);
+        setSize(900,900);
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+    private void labelsClientProspect() {
+        idTextField.setEditable(false);
+        if (client != null || choixClientProspect == ChoixClientProspect.CLIENT) { // si client n'est pas null ou que ce que je vient de créer est bien un client :
+            chiffreAffairesLabel.setVisible(true);
+            chiffreAffairetextField.setVisible(true);
+            nbEmployesLabel.setVisible(true);
+            nbEmployesTextField.setVisible(true);
+            dateProspectLabel.setVisible(false);
+            dateProspectTextField.setVisible(false);
+            interetProspectLabel.setVisible(false);
+            interetProspectTextField.setVisible(false);
+        }
+        else dateProspectLabel.setVisible(true);
+        dateProspectTextField.setVisible(true);
+        interetProspectLabel.setVisible(true);
+        interetProspectTextField.setVisible(true);
+        chiffreAffairesLabel.setVisible(false);
+        chiffreAffairetextField.setVisible(false);
+        nbEmployesLabel.setVisible(false);
+        nbEmployesTextField.setVisible(false);
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
+    private void initRemplissageTextField () {
+        if (client != null) {
+            idTextField.setText(String.valueOf(client.getId()));
+            raisonSocTextField.setText(client.getRaisonSociale());
+            // continuer à set les trucs dans les textfields
+        }
+        else {
+            idTextField.setText(String.valueOf(prospect.getId()));
+            raisonSocTextField.setText(prospect.getRaisonSociale());
+            //same
+        }
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+    private void nonEditableTextfield () {
+        idTextField.setEditable(false);
+        raisonSocTextField.setEditable(false);
+        // same
     }
 }

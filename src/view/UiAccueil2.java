@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import static entities.Clients.clients;
+import static entities.Clients.getClients;
 import static entities.Prospects.prospects;
 
 public class UiAccueil2 extends JFrame {
@@ -40,16 +41,7 @@ public class UiAccueil2 extends JFrame {
         initComponents();
         listeners();
         afficherPanels();
-        clientButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choixClientProspect = ChoixClientProspect.CLIENT;
-                classeChoisieLabel.setText("Gestion des Clients");
-                crudPanel.setVisible(true);
 
-
-            }
-        });
     }
 
        /* buttonOK.addActionListener(new ActionListener() {
@@ -111,7 +103,7 @@ public class UiAccueil2 extends JFrame {
         creerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"create");
+                new UiCrud(choixClientProspect).setVisible(true);
             }
         });
         modifierButton.addActionListener(new ActionListener() {
@@ -146,6 +138,38 @@ public class UiAccueil2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,"afficher");
+            }
+        });
+
+        clientButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choixClientProspect = ChoixClientProspect.CLIENT;
+                classeChoisieLabel.setText("Gestion des Clients");
+                crudPanel.setVisible(true);
+
+
+            }
+        });
+        validerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               /* String recupAction = comboBox1.getSelectedItem().toString();
+                if (recupAction == null || recupAction.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,"Selectionnez une société");
+                    return;
+                }*/
+                int recupAction = comboBox1.getSelectedIndex();
+                if (choixClientProspect==ChoixClientProspect.CLIENT) {
+                    Client clientChoisi = clients.get(recupAction);
+                    new UiCrud(choixCrud, clientChoisi).setVisible(true);
+                }
+                else if (choixClientProspect==ChoixClientProspect.PROSPECT) {
+                    Prospect prospectChoisi = prospects.get(recupAction);
+                    new UiCrud(choixCrud,prospectChoisi).setVisible(true);
+                }
+
+
             }
         });
     }

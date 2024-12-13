@@ -38,8 +38,9 @@ public class Client extends Societe {
             }
         this.nbrEmployes = nbrEmployes;
         }
-
-
+        public static int getCompteurIdClient() { // en static parce que methode "tampon" au sein de cette classe pour récuperer l'ID sans l'incrémentation
+        return compteurIdClient;
+        }
 
     public String toString() {
         return "Client{"+super.toString()+"chiffre d'affaires :"+chiffreAffaires+"nombre employés" +nbrEmployes;
