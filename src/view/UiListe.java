@@ -1,8 +1,17 @@
 package view;
 
+import entities.Client;
+import entities.Clients;
+import entities.Prospect;
+import utilities.ChoixClientProspect;
+
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import static entities.Clients.clients;
+import static entities.Prospects.prospects;
+import static utilities.Regex.DATE_FORMATTER;
 
 public class UiListe extends JFrame {
     private JPanel contentPane;
@@ -10,18 +19,18 @@ public class UiListe extends JFrame {
     private JButton buttonCancel;
     private JTable table;
 
-    public UiListe() {
+    public UiListe(ChoixClientProspect choixClientProspect) {
         setContentPane(contentPane);
         //    setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         initComponent();
         listeners();
-        remplissageJTable();
+        remplissageJTable(choixClientProspect);
     }
 
 
     private void initComponent() {
-        this.setSize(600, 600);
+        this.setSize(900, 900);
     }
 
     private void listeners() {
@@ -64,18 +73,47 @@ public class UiListe extends JFrame {
         dispose();
     }
 
-    private void remplissageJTable() {
+    private void remplissageJTable(ChoixClientProspect choixClientProspect) {
         DefaultTableModel modelTable ;
         String[] entete;
-        entete = new String[] {"1", "2", "3"};
-        modelTable = new DefaultTableModel(new Object[][]{}, entete);
-        modelTable.addRow(entete);
-        for (int i= 1; i <4; i++)
-            modelTable.addRow(new Object[] {
-                    "d","b",
-                    10,"b",
-                    "f"
-            });
+        if (choixClientProspect == ChoixClientProspect.CLIENT) {
+            entete = new String[]{"identifiant", "raison sociale", "nr rue", "nom rue", "code postal", "ville", "telephone", "mail", "CA", "nbr employés"};
+            modelTable = new DefaultTableModel(new Object[][]{}, entete);
+            modelTable.addRow(entete);
+
+            for (Client client : clients) {
+                modelTable.addRow(new Object[]{
+                        client.getId(),
+                        client.getRaisonSociale(),
+                        client.getAdresse().getRueNb(),
+                        client.getAdresse().getRueNom(),
+                        client.getAdresse().getCodePostal(),
+                        client.getAdresse().getVille(),
+                        client.getTelephone(),
+                        client.getEmail(),
+                        client.getChiffreAffaires(),
+                        client.getNbrEmployes(),
+                });
+            }
+        } else {
+            entete = new String[]{"identifiant", "raison sociale", "nr rue", "nom rue", "code postal", "ville", "telephone", "mail", "date prospection", "interêt"};
+            modelTable = new DefaultTableModel(new Object[][]{}, entete);
+            modelTable.addRow(entete);
+            for (Prospect prospect : prospects) {
+                modelTable.addRow(new Object[]{
+                        prospect.getId(),
+                        prospect.getRaisonSociale(),
+                        prospect.getAdresse().getRueNb(),
+                        prospect.getAdresse().getRueNom(),
+                        prospect.getAdresse().getCodePostal(),
+                        prospect.getAdresse().getVille(),
+                        prospect.getTelephone(),
+                        prospect.getEmail(),
+                        prospect.getDateProspection().format(DATE_FORMATTER),
+                        prospect.getInteretProspect(),
+                });
+            }
+        }
         table.setModel(modelTable);
     }
 }

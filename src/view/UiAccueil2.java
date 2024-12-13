@@ -137,7 +137,7 @@ public class UiAccueil2 extends JFrame {
         afficherListeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"afficher");
+                new UiListe(choixClientProspect).setVisible(true);
             }
         });
 
@@ -148,6 +148,15 @@ public class UiAccueil2 extends JFrame {
                 classeChoisieLabel.setText("Gestion des Clients");
                 crudPanel.setVisible(true);
 
+            }
+        });
+
+        prospectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choixClientProspect = ChoixClientProspect.PROSPECT;
+                classeChoisieLabel.setText("Gestion des Prospects");
+                crudPanel.setVisible(true);
 
             }
         });
