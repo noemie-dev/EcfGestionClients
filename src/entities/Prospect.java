@@ -16,9 +16,8 @@ public class Prospect extends Societe {
     public Prospect() {
     }
 
-    public Prospect(int id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire, String dateProspect, String interetProspect) throws NullPointerException, SaisieException {
-        super(id, raisonSociale, adresse, telephone, email, commentaire);
-        setId(compteurIdProspect++);
+    public Prospect(String raisonSociale, Adresse adresse, String telephone, String email, String commentaire, String dateProspect, String interetProspect) throws NullPointerException, SaisieException {
+        super(compteurIdProspect++, raisonSociale, adresse, telephone, email, commentaire);
         setDateProspection(dateProspect);
         setInteretProspect(interetProspect);
 

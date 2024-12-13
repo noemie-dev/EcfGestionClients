@@ -9,9 +9,9 @@ public class Client extends Societe {
     public Client() {
     }
 
-    public Client( int id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire, long chiffreAffaires, int nbrEmployes) throws NullPointerException, SaisieException {
-        super(id, raisonSociale, adresse, telephone, email, commentaire);
-        setId(compteurIdClient++); // lors de l'instanciation d'un nouvel objet client, l'id actuel est attribué, puis incrémenté pour le suivant.
+    public Client(String raisonSociale, Adresse adresse, String telephone, String email, String commentaire, long chiffreAffaires, int nbrEmployes) throws NullPointerException, SaisieException {
+        super(compteurIdClient++, raisonSociale, adresse, telephone, email, commentaire);
+        // lors de l'instanciation d'un nouvel objet client, l'id actuel est attribué, puis incrémenté pour le suivant.
         setChiffreAffaires(chiffreAffaires);
         setNbrEmployes(nbrEmployes);
     }

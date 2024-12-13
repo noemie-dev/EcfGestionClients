@@ -1,11 +1,15 @@
 package view;
 
-import entities.Client;
-import entities.Prospect;
+import entities.*;
 import utilities.ChoixClientProspect;
 import utilities.ChoixCrud;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
 
 public class UiCrud extends JFrame {
     private JPanel contentPane;
@@ -23,7 +27,7 @@ public class UiCrud extends JFrame {
     private JTextField chiffreAffairetextField;
     private JTextField nbEmployesTextField;
     private JButton crudValiderButton;
-    private JTextArea CommTextArea;
+    private JTextArea commTextArea;
     private JLabel emptyLabel;
     private JLabel commLabel;
     private JLabel idLabel;
@@ -42,6 +46,7 @@ public class UiCrud extends JFrame {
     private JTextField interetProspectTextField;
     private JLabel interetProspectLabel;
     private JLabel dateProspectLabel;
+    private JComboBox ouiNonCombobox;
     private ChoixCrud choixCrud;
     private Client client;
     private Prospect prospect;
@@ -59,8 +64,7 @@ public class UiCrud extends JFrame {
             nonEditableTextfield();
             setTitle("Supprimer un client");
         }
-
-
+        listeners();
 
     }
 
@@ -76,6 +80,7 @@ public class UiCrud extends JFrame {
             nonEditableTextfield();
             setTitle("Supprimer un prospect");
         }
+        listeners();
     }
 
     // constructeur pour creer
@@ -83,8 +88,41 @@ public class UiCrud extends JFrame {
         initComponents();
         setTitle("Créer un client");
         this.choixClientProspect = choixClientProspect;
+        this.choixCrud = ChoixCrud.CREER;
         labelsClientProspect();
         idTextField.setText(String.valueOf(Client.getCompteurIdClient())); // je recupère l'identifiant dans ma classe avec un getter static
+        listeners();
+
+    }
+
+    private void listeners(){
+        crudValiderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // en fonction du choix crud :
+                switch (choixCrud) {
+                    case CREER:
+                        try {
+                            validerCreation();
+                        } catch (SaisieException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        ;
+                    case MODIFIER:
+                        try {
+                            validerModification();
+                        } catch (SaisieException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                        ;
+                    case SUPPRIMER:
+                        ;
+
+                }
+
+            }
+        });
     }
 
 
@@ -143,16 +181,20 @@ public class UiCrud extends JFrame {
             dateProspectLabel.setVisible(false);
             dateProspectTextField.setVisible(false);
             interetProspectLabel.setVisible(false);
-            interetProspectTextField.setVisible(false);
+
+            ouiNonCombobox.setVisible(false);
         }
-        else dateProspectLabel.setVisible(true);
-        dateProspectTextField.setVisible(true);
-        interetProspectLabel.setVisible(true);
-        interetProspectTextField.setVisible(true);
-        chiffreAffairesLabel.setVisible(false);
-        chiffreAffairetextField.setVisible(false);
-        nbEmployesLabel.setVisible(false);
-        nbEmployesTextField.setVisible(false);
+        else {
+            dateProspectLabel.setVisible(true);
+            dateProspectTextField.setVisible(true);
+            interetProspectLabel.setVisible(true);
+            ouiNonCombobox.setVisible(true);
+            chiffreAffairesLabel.setVisible(false);
+            chiffreAffairetextField.setVisible(false);
+            nbEmployesLabel.setVisible(false);
+            nbEmployesTextField.setVisible(false);
+        }
+
     }
 
     private void initRemplissageTextField () {
@@ -172,5 +214,64 @@ public class UiCrud extends JFrame {
         idTextField.setEditable(false);
         raisonSocTextField.setEditable(false);
         // same
+    }
+
+    private void validerCreation() throws SaisieException { // constructeur avec le contenu des textfields
+        try {
+            if (choixClientProspect == ChoixClientProspect.CLIENT) {
+                Clients.getClients().add(new Client(
+                        raisonSocTextField.getText(),
+                        new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()),
+                        telephoneTextField.getText(),
+                        emailTextField.getText(),
+                        commTextArea.getText(),
+                        parseLong(chiffreAffairetextField.getText()),
+                        parseInt(nbEmployesTextField.getText())
+                ));
+            }
+            else {
+                Prospects.getProspects().add(new Prospect(
+                        raisonSocTextField.getText(),
+                        new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()),
+                        telephoneTextField.getText(),
+                        emailTextField.getText(),
+                        commTextArea.getText(),
+                        dateProspectTextField.getText(),
+                        ouiNonCombobox.getSelectedItem().toString()
+                ));
+            }
+
+            JOptionPane.showMessageDialog(null, "BIEN JOUER NONOOOOO");
+
+        } catch (SaisieException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    private void validerModification() throws SaisieException {
+        try {
+            if (choixClientProspect == ChoixClientProspect.CLIENT) {
+                client.setRaisonSociale(raisonSocTextField.getText());
+                client.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()));
+                client.setTelephone(telephoneTextField.getText());
+                client.setEmail(emailTextField.getText());
+                client.setCommentaire(commTextArea.getText());
+                client.setChiffreAffaires(parseLong(chiffreAffairetextField.getText()));
+                client.setNbrEmployes(parseInt(nbEmployesTextField.getText()));
+            }
+            else {
+                prospect.setRaisonSociale(raisonSocTextField.getText());
+                prospect.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()));
+                prospect.setTelephone(telephoneTextField.getText());
+                prospect.setEmail(emailTextField.getText());
+                prospect.setCommentaire(commTextArea.getText());
+                prospect.setDateProspection(dateProspectTextField.getText());
+                prospect.setInteretProspect(ouiNonCombobox.getSelectedItem().toString());
+
+            }
+
+        } catch (SaisieException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 }
