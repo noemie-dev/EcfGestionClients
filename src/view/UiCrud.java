@@ -97,6 +97,23 @@ public class UiCrud extends JFrame {
     }
 
     private void listeners() {
+
+        retourButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"Voulez allez être redirigé vers l'accueil");
+                new UiAccueil2().setVisible(true);
+                dispose();
+            }
+        });
+
+        quitterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Fermeture de l'application");
+                System.exit(0);
+            }
+        });
+
+
         crudValiderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

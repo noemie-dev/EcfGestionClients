@@ -44,52 +44,6 @@ public class UiAccueil2 extends JFrame {
 
     }
 
-       /* buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        clientButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"ok");
-                crudPanel.setVisible(true);
-            }
-        });*/
-
-
-
-
-    private void onOK() {
-        // add your code here
-        dispose();
-    }
-
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
 
     private void initComponents() {
         setContentPane(contentPane);
@@ -100,6 +54,23 @@ public class UiAccueil2 extends JFrame {
     }
 
     private void listeners() {
+
+        retourButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"Voulez allez être redirigé vers l'accueil");
+                new UiAccueil2().setVisible(true);
+                dispose();
+            }
+        });
+
+       quitterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               JOptionPane.showMessageDialog(null, "Fermeture de l'application");
+               System.exit(0);
+            }
+        });
+
+
         creerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
