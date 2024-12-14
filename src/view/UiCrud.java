@@ -351,7 +351,7 @@ public class UiCrud extends JFrame {
                 if (choixClientProspect == ChoixClientProspect.CLIENT) {
                     Clients.getClients().remove(client);
                     JOptionPane.showMessageDialog(this, "client supprimé avec succès");
-                } else {
+                } else if (choixClientProspect == ChoixClientProspect.PROSPECT) {
                     Prospects.getProspects().remove(prospect);
                     JOptionPane.showMessageDialog(this, "prospect supprimé");
 
