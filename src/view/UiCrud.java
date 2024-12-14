@@ -243,7 +243,6 @@ public class UiCrud extends JFrame {
                 ));
             }
 
-            JOptionPane.showMessageDialog(null, "BIEN JOUER NONOOOOO");
 
         } catch (SaisieException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -287,13 +286,13 @@ public class UiCrud extends JFrame {
             if (confirmation == JOptionPane.YES_OPTION) {
                 if (choixClientProspect == ChoixClientProspect.CLIENT) {
                     Clients.getClients().remove(client);
-                    JOptionPane.showMessageDialog(this, "client supprimé avec succes");
+                    JOptionPane.showMessageDialog(this, "client supprimé avec succès");
                 } else {
                     Prospects.getProspects().remove(prospect);
-                    JOptionPane.showMessageDialog(this, "prospect suprrimé");
+                    JOptionPane.showMessageDialog(this, "prospect supprimé");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "suppression annulee");
+                JOptionPane.showMessageDialog(this, "suppression annulée");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
