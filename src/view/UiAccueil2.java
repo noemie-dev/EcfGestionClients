@@ -14,8 +14,8 @@ import static entities.Prospects.prospects;
 
 public class UiAccueil2 extends JFrame {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JButton retourButton;
+    private JButton quitterButton;
     private JPanel accueilChoixPanel;
     private JPanel crudPanel;
     private JPanel modifSuppPanel;
@@ -93,7 +93,7 @@ public class UiAccueil2 extends JFrame {
 
     private void initComponents() {
         setContentPane(contentPane);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(retourButton);
         this.setTitle("Accueil");
         this.setSize(900,900);
 

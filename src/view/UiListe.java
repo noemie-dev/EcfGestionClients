@@ -1,31 +1,27 @@
 package view;
 
 import entities.Client;
-import entities.Clients;
 import entities.Prospect;
-import entities.Prospects;
 import utilities.ChoixClientProspect;
 
 import java.awt.event.*;
-import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import static entities.Clients.clients;
-import static entities.Clients.getClients;
 import static entities.Prospects.prospects;
 import static utilities.Regex.DATE_FORMATTER;
 
 public class UiListe extends JFrame {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JButton retourButton;
+    private JButton quitterButton;
     private JTable table;
 
     public UiListe(ChoixClientProspect choixClientProspect) {
         setContentPane(contentPane);
         //    setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(retourButton);
         initComponent();
         listeners();
         remplissageJTable(choixClientProspect);
@@ -37,13 +33,13 @@ public class UiListe extends JFrame {
     }
 
     private void listeners() {
-        buttonOK.addActionListener(new ActionListener() {
+        retourButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
+        quitterButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
