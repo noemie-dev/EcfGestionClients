@@ -104,6 +104,7 @@ public class UiAccueil2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new UiCrud(choixClientProspect).setVisible(true);
+                dispose();
             }
         });
         modifierButton.addActionListener(new ActionListener() {
@@ -117,6 +118,7 @@ public class UiAccueil2 extends JFrame {
                else classeChoisieLabel2.setText("Gestion des Prospects");
                 actionChoisieLabel.setText("Modifier");
                 modifSuppPanel.setVisible(true);
+                crudPanel.setVisible(false);
 
             }
         });
@@ -131,6 +133,7 @@ public class UiAccueil2 extends JFrame {
                 else classeChoisieLabel2.setText("Gestion des Prospects");
                 actionChoisieLabel.setText("Supprimer");
                 modifSuppPanel.setVisible(true);
+                crudPanel.setVisible(false);
 
             }
         });
@@ -138,6 +141,7 @@ public class UiAccueil2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new UiListe(choixClientProspect).setVisible(true);
+                dispose();
             }
         });
 
@@ -147,6 +151,7 @@ public class UiAccueil2 extends JFrame {
                 choixClientProspect = ChoixClientProspect.CLIENT;
                 classeChoisieLabel.setText("Gestion des Clients");
                 crudPanel.setVisible(true);
+                accueilChoixPanel.setVisible(false);
 
             }
         });
@@ -157,6 +162,7 @@ public class UiAccueil2 extends JFrame {
                 choixClientProspect = ChoixClientProspect.PROSPECT;
                 classeChoisieLabel.setText("Gestion des Prospects");
                 crudPanel.setVisible(true);
+                accueilChoixPanel.setVisible(false);
 
             }
         });
@@ -177,6 +183,7 @@ public class UiAccueil2 extends JFrame {
                     Prospect prospectChoisi = prospects.get(recupAction);
                     new UiCrud(choixCrud,prospectChoisi).setVisible(true);
                 }
+                dispose();
 
 
             }

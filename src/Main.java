@@ -22,7 +22,6 @@ public class Main {
 
         UiAccueil2 uiAccueil2 = new UiAccueil2();
         uiAccueil2.setVisible(true);
-       // new UiListe().setVisible(true);
         remplissage();
 
         LOGGER.log(Level.INFO, "Fermeture de l'application");

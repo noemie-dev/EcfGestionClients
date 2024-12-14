@@ -59,6 +59,7 @@ public class UiCrud extends JFrame {
         this.client = clientChoisi;
         labelsClientProspect();
         initRemplissageTextField();
+        crudValiderButton.setText(choixCrud.toString());
         if (choixCrud == ChoixCrud.SUPPRIMER) {
             nonEditableTextfield();
             setTitle("Supprimer un client");
@@ -75,6 +76,7 @@ public class UiCrud extends JFrame {
         this.prospect = prospectChoisi;
         labelsClientProspect();
         initRemplissageTextField();
+        crudValiderButton.setText(choixCrud.toString());
         if (choixCrud == ChoixCrud.SUPPRIMER) {
             nonEditableTextfield();
             setTitle("Supprimer un prospect");
@@ -104,26 +106,31 @@ public class UiCrud extends JFrame {
                         try {
                             validerCreation();
                         } catch (SaisieException ex) {
-                            throw new RuntimeException(ex);
+                            JOptionPane.showMessageDialog(null, "Erreur : creation annulée");
                         }
-                        ;
+                        break;
+
                     case MODIFIER:
                         try {
                             validerModification();
                         } catch (SaisieException ex) {
-                            throw new RuntimeException(ex);
+                            JOptionPane.showMessageDialog(null, "Erreur : modification annulée");
                         }
+                        break;
 
-                        ;
+
                     case SUPPRIMER:
                         try {
                             validerSuppression();
                         } catch (SaisieException ex) {
-                            throw new RuntimeException(ex);
+                            JOptionPane.showMessageDialog(null, "Erreur : suppression annulée");;
                         }
-                        ;
+                        break;
 
                 }
+                dispose();
+                UiAccueil2 uiAccueil2 = new UiAccueil2();
+                uiAccueil2.setVisible(true);
 
             }
         });
@@ -249,7 +256,7 @@ public class UiCrud extends JFrame {
         // same
     }
 
-    private void validerCreation() throws SaisieException { // constructeur avec le contenu des textfields
+    private void validerCreation() throws SaisieException, NullPointerException { // constructeur avec le contenu des textfields
         try {
             if (choixClientProspect == ChoixClientProspect.CLIENT) {
                 Clients.getClients().add(new Client(
@@ -273,8 +280,13 @@ public class UiCrud extends JFrame {
                 ));
             }
 
+            JOptionPane.showMessageDialog(null, "la creation est bien prise en compte");
+
 
         } catch (SaisieException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
@@ -299,6 +311,8 @@ public class UiCrud extends JFrame {
                 prospect.setInteretProspect(ouiNonCombobox.getSelectedItem().toString());
 
             }
+            JOptionPane.showMessageDialog(null,"la modification est prise en compte");
+
 
         } catch (SaisieException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -323,6 +337,7 @@ public class UiCrud extends JFrame {
                 } else {
                     Prospects.getProspects().remove(prospect);
                     JOptionPane.showMessageDialog(this, "prospect supprimé");
+
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "suppression annulée");

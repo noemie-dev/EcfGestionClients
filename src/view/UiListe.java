@@ -79,7 +79,6 @@ public class UiListe extends JFrame {
     private void remplissageJTable(ChoixClientProspect choixClientProspect) {
         DefaultTableModel modelTable ;
         String[] entete;
-        List<?> choixTriRaisonSoc;
         if (choixClientProspect == ChoixClientProspect.CLIENT) {
             entete = new String[]{"identifiant", "raison sociale", "nr rue", "nom rue", "code postal", "ville", "telephone", "mail", "CA", "nbr employés"};
             modelTable = new DefaultTableModel(new Object[][]{}, entete);
