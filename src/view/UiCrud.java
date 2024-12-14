@@ -329,5 +329,6 @@ public class UiCrud extends JFrame {
             throw new RuntimeException(e);
         }
     }
+
 }
 
