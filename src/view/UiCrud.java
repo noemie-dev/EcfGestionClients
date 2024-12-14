@@ -43,7 +43,6 @@ public class UiCrud extends JFrame {
     private JLabel chiffreAffairesLabel;
     private JLabel nbEmployesLabel;
     private JTextField dateProspectTextField;
-    private JTextField interetProspectTextField;
     private JLabel interetProspectLabel;
     private JLabel dateProspectLabel;
     private JComboBox ouiNonCombobox;
@@ -226,7 +225,7 @@ public class UiCrud extends JFrame {
             emailTextField.setText(prospect.getEmail());
             commTextArea.setText(prospect.getCommentaire());
             dateProspectTextField.setText(prospect.getDateProspection().toString());
-            interetProspectTextField.setText(prospect.getInteretProspect().toString());
+            ouiNonCombobox.getSelectedItem();
 
             //same
         }
@@ -245,7 +244,7 @@ public class UiCrud extends JFrame {
         chiffreAffairetextField.setEditable(false);
         nbEmployesTextField.setEditable(false);
         dateProspectTextField.setEditable(false);
-        interetProspectTextField.setEditable(false);
+        ouiNonCombobox.setEditable(false);
 
         // same
     }
@@ -280,7 +279,7 @@ public class UiCrud extends JFrame {
         }
     }
 
-    private void validerModification() throws SaisieException {
+    private void validerModification() throws SaisieException, NullPointerException {
         try {
             if (choixClientProspect == ChoixClientProspect.CLIENT) {
                 client.setRaisonSociale(raisonSocTextField.getText());
@@ -290,7 +289,7 @@ public class UiCrud extends JFrame {
                 client.setCommentaire(commTextArea.getText());
                 client.setChiffreAffaires(parseLong(chiffreAffairetextField.getText()));
                 client.setNbrEmployes(parseInt(nbEmployesTextField.getText()));
-            } else {
+            } else if (choixClientProspect == ChoixClientProspect.PROSPECT) {
                 prospect.setRaisonSociale(raisonSocTextField.getText());
                 prospect.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()));
                 prospect.setTelephone(telephoneTextField.getText());
@@ -302,6 +301,9 @@ public class UiCrud extends JFrame {
             }
 
         } catch (SaisieException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
