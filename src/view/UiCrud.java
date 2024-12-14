@@ -92,6 +92,7 @@ public class UiCrud extends JFrame {
         this.choixCrud = ChoixCrud.CREER;
         labelsClientProspect();
         idTextField.setText(String.valueOf(Client.getCompteurIdClient())); // je recupère l'identifiant dans ma classe avec un getter static
+        crudValiderButton.setText(choixCrud.toString());
         listeners();
 
     }
