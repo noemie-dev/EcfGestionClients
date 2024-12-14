@@ -34,13 +34,20 @@ public class Main {
 
             Client client = new Client( "apple", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", 5454, 55);
             Client client2 = new Client( "microsoft", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", 5454, 55);
+            Client client3 = new Client("aldi", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", 5454, 55);
+            Client client4 = new Client ("lidl", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", 5454, 55);
             Prospect prospect = new Prospect( "google", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", " ", "27/08/1995", "OUI");
             Prospect prospect2 = new Prospect( "linux", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", "27/08/1995", "non");
-
+            Prospect prospect3 = new Prospect("samsung", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", "27/08/1995", "non");
+            Prospect prospect4 = new Prospect("leclerc", new Adresse("5", "liberation", "57670", "bobville"), "+3385562012", "email@email.com", "non", "27/08/1995", "non");
             Clients.clients.add(client);
             Clients.clients.add(client2);
+            Clients.clients.add(client3);
+            Clients.clients.add(client4);
             Prospects.prospects.add(prospect);
             Prospects.ajouterProspect(prospect2);
+            Prospects.ajouterProspect(prospect3);
+            Prospects.ajouterProspect(prospect4);
 
         }
         catch (NullPointerException e) {

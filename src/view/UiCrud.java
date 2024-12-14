@@ -205,10 +205,29 @@ public class UiCrud extends JFrame {
         if (client != null) {
             idTextField.setText(String.valueOf(client.getId()));
             raisonSocTextField.setText(client.getRaisonSociale());
+            nbRueTextField.setText(client.getAdresse().getRueNb());
+            nomRueTextField.setText(client.getAdresse().getRueNom());
+            codePostalTextField.setText(client.getAdresse().getCodePostal());
+            villeTextField.setText(client.getAdresse().getVille());
+            telephoneTextField.setText(client.getTelephone());
+            emailTextField.setText(client.getEmail());
+            commTextArea.setText(client.getCommentaire());
+            chiffreAffairetextField.setText(String.valueOf(client.getChiffreAffaires()));
+            nbEmployesTextField.setText(String.valueOf(client.getNbrEmployes()));
             // continuer à set les trucs dans les textfields
         } else {
             idTextField.setText(String.valueOf(prospect.getId()));
             raisonSocTextField.setText(prospect.getRaisonSociale());
+            nbRueTextField.setText(prospect.getAdresse().getRueNb());
+            nomRueTextField.setText(prospect.getAdresse().getRueNom());
+            codePostalTextField.setText(prospect.getAdresse().getCodePostal());
+            villeTextField.setText(prospect.getAdresse().getVille());
+            telephoneTextField.setText(prospect.getTelephone());
+            emailTextField.setText(prospect.getEmail());
+            commTextArea.setText(prospect.getCommentaire());
+            dateProspectTextField.setText(prospect.getDateProspection().toString());
+            interetProspectTextField.setText(prospect.getInteretProspect().toString());
+
             //same
         }
     }
@@ -216,6 +235,18 @@ public class UiCrud extends JFrame {
     private void nonEditableTextfield() {
         idTextField.setEditable(false);
         raisonSocTextField.setEditable(false);
+        nbRueTextField.setEditable(false);
+        nomRueTextField.setEditable(false);
+        codePostalTextField.setEditable(false);
+        villeTextField.setEditable(false);
+        telephoneTextField.setEditable(false);
+        emailTextField.setEditable(false);
+        commTextArea.setEditable(false);
+        chiffreAffairetextField.setEditable(false);
+        nbEmployesTextField.setEditable(false);
+        dateProspectTextField.setEditable(false);
+        interetProspectTextField.setEditable(false);
+
         // same
     }
 
