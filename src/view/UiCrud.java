@@ -49,7 +49,7 @@ public class UiCrud extends JFrame {
     private ChoixCrud choixCrud;
     private Client client;
     private Prospect prospect;
-    private ChoixClientProspect choixClientProspect;
+    private ChoixClientProspect choixClasse;
 
     // Constructeur modifier ou supprimer un client
     public UiCrud(ChoixCrud choixCrud, Client clientChoisi) {
@@ -57,6 +57,7 @@ public class UiCrud extends JFrame {
         setTitle("Modifier un client");
         this.choixCrud = choixCrud;
         this.client = clientChoisi;
+        choixClasse = ChoixClientProspect.CLIENT;
         labelsClientProspect();
         initRemplissageTextField();
         crudValiderButton.setText(choixCrud.toString());
@@ -74,6 +75,7 @@ public class UiCrud extends JFrame {
         setTitle("Modifier un prospect");
         this.choixCrud = choixCrud;
         this.prospect = prospectChoisi;
+        choixClasse = ChoixClientProspect.PROSPECT;
         labelsClientProspect();
         initRemplissageTextField();
         crudValiderButton.setText(choixCrud.toString());
@@ -88,7 +90,7 @@ public class UiCrud extends JFrame {
     public UiCrud(ChoixClientProspect choixClientProspect) {
         initComponents();
         setTitle("Créer un client");
-        this.choixClientProspect = choixClientProspect;
+        this.choixClasse = choixClientProspect;
         this.choixCrud = ChoixCrud.CREER;
         labelsClientProspect();
         idTextField.setText(String.valueOf(Client.getCompteurIdClient())); // je recupère l'identifiant dans ma classe avec un getter static
@@ -131,6 +133,7 @@ public class UiCrud extends JFrame {
                     case MODIFIER:
                         try {
                             validerModification();
+                            JOptionPane.showMessageDialog(null,"c'est validé");
                         } catch (SaisieException ex) {
                             JOptionPane.showMessageDialog(null, "Erreur : modification annulée");
                         }
@@ -202,7 +205,7 @@ public class UiCrud extends JFrame {
 
     private void labelsClientProspect() {
         idTextField.setEditable(false);
-        if (client != null || choixClientProspect == ChoixClientProspect.CLIENT) { // si client n'est pas null ou que ce que je vient de créer est bien un client :
+        if (client != null || choixClasse == ChoixClientProspect.CLIENT) { // si client n'est pas null ou que ce que je vient de créer est bien un client :
             chiffreAffairesLabel.setVisible(true);
             chiffreAffairetextField.setVisible(true);
             nbEmployesLabel.setVisible(true);
@@ -276,7 +279,7 @@ public class UiCrud extends JFrame {
 
     private void validerCreation() throws SaisieException, NullPointerException { // constructeur avec le contenu des textfields
         try {
-            if (choixClientProspect == ChoixClientProspect.CLIENT) {
+            if (choixClasse == ChoixClientProspect.CLIENT) {
                 Clients.getClients().add(new Client(
                         raisonSocTextField.getText(),
                         new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()),
@@ -311,7 +314,7 @@ public class UiCrud extends JFrame {
 
     private void validerModification() throws SaisieException, NullPointerException {
         try {
-            if (choixClientProspect == ChoixClientProspect.CLIENT) {
+            if (choixClasse == ChoixClientProspect.CLIENT) {
                 client.setRaisonSociale(raisonSocTextField.getText());
                 client.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()));
                 client.setTelephone(telephoneTextField.getText());
@@ -319,7 +322,7 @@ public class UiCrud extends JFrame {
                 client.setCommentaire(commTextArea.getText());
                 client.setChiffreAffaires(parseLong(chiffreAffairetextField.getText()));
                 client.setNbrEmployes(parseInt(nbEmployesTextField.getText()));
-            } else if (choixClientProspect == ChoixClientProspect.PROSPECT) {
+            } else if (choixClasse == ChoixClientProspect.PROSPECT) {
                 prospect.setRaisonSociale(raisonSocTextField.getText());
                 prospect.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()));
                 prospect.setTelephone(telephoneTextField.getText());
@@ -349,10 +352,10 @@ public class UiCrud extends JFrame {
                     JOptionPane.WARNING_MESSAGE);
 
             if (confirmation == JOptionPane.YES_OPTION) {
-                if (choixClientProspect == ChoixClientProspect.CLIENT) {
+                if (choixClasse == ChoixClientProspect.CLIENT) {
                     Clients.getClients().remove(client);
                     JOptionPane.showMessageDialog(this, "client supprimé avec succès");
-                } else if (choixClientProspect == ChoixClientProspect.PROSPECT) {
+                } else if (choixClasse == ChoixClientProspect.PROSPECT) {
                     Prospects.getProspects().remove(prospect);
                     JOptionPane.showMessageDialog(this, "prospect supprimé");
 
