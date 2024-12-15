@@ -7,7 +7,7 @@ public class Adresse {
     private String rueNb;
     private String rueNom;
     private String codePostal;
-    String ville;
+    private String ville;
 
     // rétablissement du constructeur implicite
 
