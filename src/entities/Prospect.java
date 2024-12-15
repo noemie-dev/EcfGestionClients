@@ -1,6 +1,8 @@
 package entities;
 
-// classe fille de la classe abstraite société, classe soeur de Client. Gère les objets Prospect.
+/** classe fille de la classe abstraite société, classe soeur de Client. Gère les objets Prospect.
+*/
+
 
 //importation du pattern pour la date de prospection et exception pour prévenir d'une saisie de date dans un mauvais format
 import java.time.DateTimeException;
@@ -46,7 +48,7 @@ public class Prospect extends Societe {
         return reponseInteret;
     }
 
-    /** dans ce setter :   si le string interetProspect saisi par l'utilisateur comporte une des valeurs présentes dans l'enum OuiNon
+    /* dans ce setter :   si le string interetProspect saisi par l'utilisateur comporte une des valeurs présentes dans l'enum OuiNon
      * alors je l'assigne dans la propriété reponseInteret
      * sinon cela renvoie une exception
      */

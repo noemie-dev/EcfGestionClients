@@ -1,6 +1,7 @@
 package view;
 
-// interface affichant la liste des clients et des prospects, non modifiable
+/** interface affichant la liste des clients et des prospects, non modifiable
+ */
 
 import entities.Client;
 import entities.Prospect;

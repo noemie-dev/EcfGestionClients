@@ -1,6 +1,8 @@
 package entities;
 
-// classe fille de la classe abstraite société, classe soeur de Prospect. Gère les objets Client
+/** classe fille de la classe abstraite société, classe soeur de Prospect. Gère les objets Client
+ * */
+
 public class Client extends Societe {
     private static int compteurIdClient = 1;
     long chiffreAffaires;
@@ -43,7 +45,10 @@ public class Client extends Societe {
         this.nbrEmployes = nbrEmployes;
         }
 
-    // méthode static parce que methode "tampon" au sein de cette classe, servant à récuperer l'ID dans d'autres classes sans l'incrémentation
+    /** méthode static parce que methode "tampon" au sein de cette classe, servant à récuperer l'ID dans d'autres classes sans l'incrémentation
+     *
+     * @return compteurIdClient
+     */
         public static int getCompteurIdClient() {
         return compteurIdClient;
         }

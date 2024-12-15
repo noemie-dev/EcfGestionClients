@@ -1,6 +1,8 @@
 package gestionlog;
 
-// classe qui gère ce que doivent contenir les logs
+/** classe qui gère ce que doivent contenir les logs
+ * */
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
