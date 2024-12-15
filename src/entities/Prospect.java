@@ -12,8 +12,8 @@ import utilities.OuiNon;
  */
 public class Prospect extends Societe {
     private static int compteurIdProspect = 1;
-    String dateProspect;
-    LocalDate dateProspection;
+   private String dateProspect;
+    private LocalDate dateProspection;
     private OuiNon reponseInteret;
 
 // rétablissement du constructeur implicite
