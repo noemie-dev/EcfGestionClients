@@ -1,5 +1,9 @@
 package view;
 
+/* Classe représentant l'interface utilisateur pour les opérations CRUD (Créer, Lire, Modifier, Supprimer)
+   * sur les entités Client et Prospect.
+ */
+
 import entities.*;
 import utilities.ChoixClientProspect;
 import utilities.ChoixCrud;
@@ -58,11 +62,11 @@ public class UiCrud extends JFrame {
         this.choixCrud = choixCrud;
         this.client = clientChoisi;
         choixClasse = ChoixClientProspect.CLIENT;
-        labelsClientProspect();
-        initRemplissageTextField();
-        crudValiderButton.setText(choixCrud.toString());
+        labelsClientProspect(); // Configure l'interface en fonction du type d'entité (Client/Prospect)
+        initRemplissageTextField(); // Préremplit les champs avec les données du client ou du prospect
+        crudValiderButton.setText(choixCrud.toString()); // Configure le bouton en fonction de l'opération
         if (choixCrud == ChoixCrud.SUPPRIMER) {
-            nonEditableTextfield();
+            nonEditableTextfield(); // Rend les champs non modifiables
             setTitle("Supprimer un client");
         }
         listeners();
@@ -93,7 +97,7 @@ public class UiCrud extends JFrame {
         this.choixClasse = choixClientProspect;
         this.choixCrud = ChoixCrud.CREER;
         labelsClientProspect();
-        idTextField.setText(String.valueOf(Client.getCompteurIdClient())); // je recupère l'identifiant dans ma classe avec un getter static
+        idTextField.setText(String.valueOf(Client.getCompteurIdClient())); // je recupère l'identifiant dans ma classe Client avec un getter static
         crudValiderButton.setText(choixCrud.toString());
         listeners();
 
@@ -203,6 +207,7 @@ public class UiCrud extends JFrame {
         setSize(900, 900);
     }
 
+    // Configure les labels et champs visibles en fonction du type d'entité (Client ou Prospect).
     private void labelsClientProspect() {
         idTextField.setEditable(false);
         if (client != null || choixClasse == ChoixClientProspect.CLIENT) { // si client n'est pas null ou que ce que je vient de créer est bien un client :

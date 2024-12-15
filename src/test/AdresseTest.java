@@ -1,5 +1,5 @@
 package test;
-
+// classe de tests de la classe Adresse, vérifie que les exceptions attendues se lèvent correctement.
 import entities.Adresse;
 import entities.SaisieException;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AdresseTest {
 
-    // Test constructeur
+    // Test constructeur avec des valeurs non autorisées, qui doivent lever une exception
     @Test
     void testConstructeurAvecValeursInvalides() {
         assertThrows(NullPointerException.class, () -> new Adresse(null, "rue", "75001", "Paris"));
@@ -18,6 +18,8 @@ class AdresseTest {
         assertThrows(SaisieException.class, () -> new Adresse("1", "rue", "invalid", "Paris"));
         assertThrows(NullPointerException.class, () -> new Adresse("1", "rue", "75001", null));
     }
+
+    // Test constructeur avec des valeurs autorisées, qui ne doivent pas lever une exception
     @Test
     void testConstructeurAvecValeursValides() {
         assertDoesNotThrow(() -> new Adresse("1", "Rue de Paris", "75001", "Paris"));
@@ -25,6 +27,7 @@ class AdresseTest {
         assertDoesNotThrow(() -> new Adresse("42A", "Boulevard Saint-Michel", "69001", "Lyon"));
     }
 
+    // tests setters
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "\t", "\n"})
     void testSetRueNbInvalide(String invalidValue) {

@@ -1,5 +1,6 @@
 package entities;
 
+// cf. commentaires de l'Arraylist Clients, exactement le même procédé
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

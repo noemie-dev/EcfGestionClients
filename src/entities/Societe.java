@@ -1,5 +1,10 @@
 package entities;
 
+/** la classe mère Société abstraite. Ne peut pas instancier d'objet mais donne le modèle
+ *  pour les classes filles Client et Prospect, auxquelles sont ajoutées des variables propres aux besoins de ces classes.
+ */
+
+// importation d'un pattern pour controler le format de saisie du téléphone et du mail
 import static utilities.Regex.PATTERN_TELEPHONE;
 import static utilities.Regex.PATTERN_EMAIL;
 
@@ -41,6 +46,7 @@ public abstract class Societe {
         return raisonSociale;
     }
 
+    // setter qui teste que la raison sociale ne soit ni nulle, ni vide, ni déjà présente dans une des deux Arraylists
     public void setRaisonSociale(String raisonSociale) throws NullPointerException, SaisieException {
         if (raisonSociale == null || raisonSociale.trim().isEmpty()) {
             throw new NullPointerException();
@@ -59,6 +65,7 @@ public abstract class Societe {
         return adresse;
     }
 
+    // setter qui vérifie que l'adresse n'est pas vide avant d'être instanciée
     public void setAdresse(Adresse adresse) throws NullPointerException {
         if (adresse == null) {
             throw new NullPointerException();
@@ -70,6 +77,7 @@ public abstract class Societe {
         return telephone;
     }
 
+    // setter qui contrôle que le champ téléphone n'est ni nul, ni vide, et respecte le pattern du téléphone
     public void setTelephone(String telephone) throws NullPointerException, SaisieException {
         if (telephone == null || telephone.trim().isEmpty()) {
             throw new NullPointerException();
@@ -86,6 +94,7 @@ public abstract class Societe {
         return email;
     }
 
+    // setter qui contrôle que le champ téléphone n'est ni nul, ni vide, et respecte le pattern du mail
     public void setEmail(String email) throws NullPointerException, SaisieException {
         if (email == null || email.trim().isEmpty()) {
             throw new NullPointerException();
@@ -106,6 +115,7 @@ public abstract class Societe {
         this.commentaire = commentaire;
     }
 
+    // méthodes qui parcourent chaque Arraylist pour vérifier que la raison sociale entrée n'est pas déjà présente dans la liste avant de l'instancier
     private boolean RaisonSocialeClientDoublon(String raisonSociale) {
         return Clients.getClients().stream().anyMatch(client -> client.getRaisonSociale().equalsIgnoreCase(raisonSociale) && !client.equals(this));
     }
