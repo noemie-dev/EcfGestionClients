@@ -72,6 +72,7 @@ public class UiListe extends JFrame {
                         client.getChiffreAffaires(),
                         client.getNbrEmployes(),
                 });
+
             }
         } else {
             entete = new String[]{"identifiant", "raison sociale", "nr rue", "nom rue", "code postal", "ville", "telephone", "mail", "date prospection", "interêt"};
