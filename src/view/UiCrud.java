@@ -124,7 +124,7 @@ public class UiCrud extends JFrame {
         crudValiderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // en fonction du choix crud :
+                // en fonction du choix crud, quand on clique sur le bouton de validation, on appelle telle méthode :
                 switch (choixCrud) {
                     case CREER:
                         try {
