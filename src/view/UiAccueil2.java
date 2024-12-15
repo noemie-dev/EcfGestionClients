@@ -1,9 +1,6 @@
 package view;
 
-/** classe pour l'interface de l'accueil qui comporte 3 panels, pour les premières étapes de selection du type d'entités
-* du type d'actions,
- * et sur quelle entité faire l'action
- */
+
 import entities.Client;
 import entities.Prospect;
 import utilities.ChoixClientProspect;
@@ -16,6 +13,10 @@ import static entities.Clients.clients;
 import static entities.Clients.getClients;
 import static entities.Prospects.prospects;
 
+/** classe pour l'interface de l'accueil qui comporte 3 panels, pour les premières étapes de selection du type d'entités
+ * du type d'actions,
+ * et sur quelle entité faire l'action
+ */
 public class UiAccueil2 extends JFrame {
     private JPanel contentPane;
     private JButton retourButton;

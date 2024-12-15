@@ -1,13 +1,14 @@
 package gestionlog;
 
-/** classe qui gère ce que doivent contenir les logs
- * */
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
+/** classe qui gère ce que doivent contenir les logs
+ * */
 public class FormatterLog extends Formatter {
     public String format (LogRecord record) {
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

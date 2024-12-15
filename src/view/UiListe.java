@@ -1,7 +1,6 @@
 package view;
 
-/** interface affichant la liste des clients et des prospects, non modifiable
- */
+
 import entities.Client;
 import entities.Prospect;
 import utilities.ChoixClientProspect;
@@ -14,6 +13,8 @@ import static entities.Clients.clients;
 import static entities.Prospects.prospects;
 import static utilities.Regex.DATE_FORMATTER;
 
+/** interface affichant la liste des clients et des prospects, non modifiable
+ */
 public class UiListe extends JFrame {
     private JPanel contentPane;
     private JButton retourButton;

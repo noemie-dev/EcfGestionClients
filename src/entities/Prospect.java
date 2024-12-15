@@ -1,7 +1,6 @@
 package entities;
 
-/** classe fille de la classe abstraite société, classe soeur de Client. Gère les objets Prospect.
-*/
+
 //importation du pattern pour la date de prospection et exception pour prévenir d'une saisie de date dans un mauvais format
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -9,7 +8,8 @@ import java.time.format.DateTimeFormatter;
 // importation de l'énumération pour contrôler la saisie de l'intérêt du prospect dans une combobox
 import utilities.OuiNon;
 
-
+/** classe fille de la classe abstraite société, classe soeur de Client. Gère les objets Prospect.
+ */
 public class Prospect extends Societe {
     private static int compteurIdProspect = 1;
     String dateProspect;

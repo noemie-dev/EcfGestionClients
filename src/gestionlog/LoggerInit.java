@@ -1,11 +1,12 @@
 package gestionlog;
 
-/** classe qui gère la création des logs, où ils doivent être enregistrés
- * */
+
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
+/** classe qui gère la création des logs, où ils doivent être enregistrés
+ * */
 public class LoggerInit {
     public static final Logger LOGGER = Logger.getLogger(LoggerInit.class.getName());
     private static FileHandler fh = null;
