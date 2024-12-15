@@ -2,8 +2,6 @@ package entities;
 
 /** classe fille de la classe abstraite société, classe soeur de Client. Gère les objets Prospect.
 */
-
-
 //importation du pattern pour la date de prospection et exception pour prévenir d'une saisie de date dans un mauvais format
 import java.time.DateTimeException;
 import java.time.LocalDate;

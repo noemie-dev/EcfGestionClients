@@ -2,8 +2,6 @@ package gestionlog;
 
 /** classe qui gère la création des logs, où ils doivent être enregistrés
  * */
-
-
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;

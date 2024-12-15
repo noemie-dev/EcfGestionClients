@@ -1,13 +1,13 @@
 package entities;
 
-/** la classe mère Société abstraite. Ne peut pas instancier d'objet mais donne le modèle
- *  pour les classes filles Client et Prospect, auxquelles sont ajoutées des variables propres aux besoins de ces classes.
- */
 
 // importation d'un pattern pour controler le format de saisie du téléphone et du mail
 import static utilities.Regex.PATTERN_TELEPHONE;
 import static utilities.Regex.PATTERN_EMAIL;
 
+/** la classe mère Société abstraite. Ne peut pas instancier d'objet mais donne le modèle
+ *  pour les classes filles Client et Prospect, auxquelles sont ajoutées des variables propres aux besoins de ces classes.
+ */
 public abstract class Societe {
     private int id; // identifiant de la société
     private String raisonSociale;

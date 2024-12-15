@@ -4,7 +4,6 @@ package view;
 * du type d'actions,
  * et sur quelle entité faire l'action
  */
-
 import entities.Client;
 import entities.Prospect;
 import utilities.ChoixClientProspect;

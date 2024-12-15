@@ -3,7 +3,6 @@ package view;
 /** Classe représentant l'interface utilisateur pour les opérations CRUD (Créer, Lire, Modifier, Supprimer)
    * sur les entités Client et Prospect.
  */
-
 import entities.*;
 import utilities.ChoixClientProspect;
 import utilities.ChoixCrud;

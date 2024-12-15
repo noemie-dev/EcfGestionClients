@@ -2,7 +2,6 @@ package entities;
 
 /** classe fille de la classe abstraite société, classe soeur de Prospect. Gère les objets Client
  * */
-
 public class Client extends Societe {
     private static int compteurIdClient = 1;
     long chiffreAffaires;
