@@ -55,7 +55,11 @@ public class UiCrud extends JFrame {
     private Prospect prospect;
     private ChoixClientProspect choixClasse;
 
-    // Constructeur modifier ou supprimer un client
+    /** Constructeur modifier ou supprimer un client
+     *
+     * @param choixCrud
+     * @param clientChoisi
+     */
     public UiCrud(ChoixCrud choixCrud, Client clientChoisi) {
         initComponents();
         setTitle("Modifier un client");
@@ -73,7 +77,11 @@ public class UiCrud extends JFrame {
 
     }
 
-    // constructeur pour modifier ou supprimer un prospect
+    /** constructeur pour modifier ou supprimer un prospect
+     *
+     * @param choixCrud
+     * @param prospectChoisi
+     */
     public UiCrud(ChoixCrud choixCrud, Prospect prospectChoisi) {
         initComponents();
         setTitle("Modifier un prospect");
@@ -90,7 +98,10 @@ public class UiCrud extends JFrame {
         listeners();
     }
 
-    // constructeur pour creer
+    /** constructeur pour creer
+     *
+     * @param choixClientProspect
+     */
     public UiCrud(ChoixClientProspect choixClientProspect) {
         initComponents();
         setTitle("Créer un client");
@@ -160,53 +171,18 @@ public class UiCrud extends JFrame {
         });
     }
 
-
-    private void onOK() {
-        // add your code here
-        dispose();
-    }
-
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
-
-
-    /*    retourButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
-        quitterButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-    }*/
-
+    /** methode pour invoquer les composants de l'interface dans le constructeur
+     *
+     */
     private void initComponents() {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(retourButton);
         setSize(900, 900);
     }
 
-    // Configure les labels et champs visibles en fonction du type d'entité (Client ou Prospect).
+    /** Configure les labels et champs visibles en fonction du type d'entité (Client ou Prospect).
+     *
+     */
     private void labelsClientProspect() {
         idTextField.setEditable(false);
         if (client != null || choixClasse == ChoixClientProspect.CLIENT) { // si client n'est pas null ou que ce que je vient de créer est bien un client :
@@ -232,6 +208,9 @@ public class UiCrud extends JFrame {
 
     }
 
+    /** remplit les textFields en fonction de l'entité choisie
+     *
+     */
     private void initRemplissageTextField() {
         if (client != null) {
             idTextField.setText(String.valueOf(client.getId()));
@@ -263,6 +242,9 @@ public class UiCrud extends JFrame {
         }
     }
 
+    /**rend les textfields non editables
+     *
+     */
     private void nonEditableTextfield() {
         idTextField.setEditable(false);
         raisonSocTextField.setEditable(false);
@@ -278,9 +260,13 @@ public class UiCrud extends JFrame {
         dateProspectTextField.setEditable(false);
         ouiNonCombobox.setEditable(false);
 
-        // same
     }
 
+    /** methode pour le bouton valider en fonction du choix d'entité quand une création est finie
+     *
+     * @throws SaisieException
+     * @throws NullPointerException
+     */
     private void validerCreation() throws SaisieException, NullPointerException { // constructeur avec le contenu des textfields
         try {
             if (choixClasse == ChoixClientProspect.CLIENT) {
@@ -316,6 +302,11 @@ public class UiCrud extends JFrame {
         }
     }
 
+    /** methode pour le bouton valider en fonction du choix d'entité quand une modification est finie
+     *
+      * @throws SaisieException
+     * @throws NullPointerException
+     */
     private void validerModification() throws SaisieException, NullPointerException {
         try {
             if (choixClasse == ChoixClientProspect.CLIENT) {
@@ -347,6 +338,10 @@ public class UiCrud extends JFrame {
         }
     }
 
+    /** methode pour le bouton valider en fonction du choix d'entité quand une création est finie
+     *
+     * @throws SaisieException
+     */
     private void validerSuppression() throws SaisieException {
         try {
             int confirmation = JOptionPane.showConfirmDialog(this,
