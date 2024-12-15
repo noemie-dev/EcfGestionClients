@@ -137,7 +137,6 @@ public class UiCrud extends JFrame {
                     case MODIFIER:
                         try {
                             validerModification();
-                            JOptionPane.showMessageDialog(null,"c'est validé");
                         } catch (SaisieException ex) {
                             JOptionPane.showMessageDialog(null, "Erreur : modification annulée");
                         }
