@@ -4,8 +4,8 @@ package entities;
  * */
 public class Client extends Societe {
     private static int compteurIdClient = 1;
-    long chiffreAffaires;
-    int nbrEmployes;
+    private long chiffreAffaires;
+    private int nbrEmployes;
 
     // rétablissement du constructeur implicite
     public Client() {
