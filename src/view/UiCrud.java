@@ -338,7 +338,7 @@ public class UiCrud extends JFrame {
         }
     }
 
-    /** methode pour le bouton valider en fonction du choix d'entité quand une création est finie
+    /** methode pour le bouton valider en fonction du choix d'entité quand une suppression est finie
      *
      * @throws SaisieException
      */
