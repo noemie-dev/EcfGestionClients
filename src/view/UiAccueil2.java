@@ -1,5 +1,10 @@
 package view;
 
+/** classe pour l'interface de l'accueil qui comporte 3 panels, pour les premières étapes de selection du type d'entités
+* du type d'actions,
+ * et sur quelle entité faire l'action
+ */
+
 import entities.Client;
 import entities.Prospect;
 import utilities.ChoixClientProspect;
@@ -37,10 +42,11 @@ public class UiAccueil2 extends JFrame {
     private ChoixCrud choixCrud;
     private ChoixClientProspect choixClientProspect;
 
+    // constructeur de l'interface
     public UiAccueil2() {
-        initComponents();
-        listeners();
-        afficherPanels();
+        initComponents(); // creer les composants à afficher
+        listeners(); // comportement assigné aux boutons
+        afficherPanels(); // gère la visibilité des 3 panels sur cet interface
 
     }
 
@@ -54,7 +60,7 @@ public class UiAccueil2 extends JFrame {
     }
 
     private void listeners() {
-
+        // boutons présents sur toutes les interfaces
         retourButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,"Voulez allez être redirigé vers l'accueil");
@@ -70,7 +76,31 @@ public class UiAccueil2 extends JFrame {
             }
         });
 
+       // boutons du premier panel accueil, choix entre client et prospect
 
+        clientButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choixClientProspect = ChoixClientProspect.CLIENT;
+                classeChoisieLabel.setText("Gestion des Clients");
+                crudPanel.setVisible(true);
+                accueilChoixPanel.setVisible(false);
+
+            }
+        });
+
+        prospectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choixClientProspect = ChoixClientProspect.PROSPECT;
+                classeChoisieLabel.setText("Gestion des Prospects");
+                crudPanel.setVisible(true);
+                accueilChoixPanel.setVisible(false);
+
+            }
+        });
+
+        // boutons CRUD du second panel
         creerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,11 +108,13 @@ public class UiAccueil2 extends JFrame {
                 dispose();
             }
         });
+
+        // remplissent le troisieme panel avec les paramètres et les actions choisis par l'utilisateur
         modifierButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 choixCrud = ChoixCrud.MODIFIER;
-                remplirCombobox();
+                remplirCombobox(); // remplit la combobox du troisieme panel avec la liste correspondante au choix du premier panel
                if (choixClientProspect==ChoixClientProspect.CLIENT) {
                    classeChoisieLabel2.setText("Gestion des Clients");
                }
@@ -107,6 +139,7 @@ public class UiAccueil2 extends JFrame {
                 crudPanel.setVisible(false);
 
             }
+
         });
         afficherListeButton.addActionListener(new ActionListener() {
             @Override
@@ -116,35 +149,11 @@ public class UiAccueil2 extends JFrame {
             }
         });
 
-        clientButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choixClientProspect = ChoixClientProspect.CLIENT;
-                classeChoisieLabel.setText("Gestion des Clients");
-                crudPanel.setVisible(true);
-                accueilChoixPanel.setVisible(false);
-
-            }
-        });
-
-        prospectButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choixClientProspect = ChoixClientProspect.PROSPECT;
-                classeChoisieLabel.setText("Gestion des Prospects");
-                crudPanel.setVisible(true);
-                accueilChoixPanel.setVisible(false);
-
-            }
-        });
+        // bouton du troisieme panel pour selectionner l'entité dans la combobox
         validerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               /* String recupAction = comboBox1.getSelectedItem().toString();
-                if (recupAction == null || recupAction.isEmpty()) {
-                    JOptionPane.showMessageDialog(null,"Selectionnez une société");
-                    return;
-                }*/
+
                 int recupAction = comboBox1.getSelectedIndex();
                 if (choixClientProspect==ChoixClientProspect.CLIENT) {
                     Client clientChoisi = clients.get(recupAction);
@@ -166,6 +175,8 @@ public class UiAccueil2 extends JFrame {
         modifSuppPanel.setVisible(false);
     }
 
+
+    // remplit la combobox du troisieme panel avec la liste correspondante au choix du premier panel
     private void remplirCombobox() {
         comboBox1.removeAllItems();
         if (choixClientProspect==ChoixClientProspect.CLIENT) {
