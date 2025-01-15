@@ -13,7 +13,9 @@ public class Client extends Societe {
 
     // lors de l'instanciation d'un nouvel objet client, l'id actuel est attribué, puis incrémenté pour le prochain objet instancié.
 
-    public Client(String raisonSociale, Adresse adresse, String telephone, String email, String commentaire, long chiffreAffaires, int nbrEmployes) throws NullPointerException, SaisieException {
+    public Client(String raisonSociale, Adresse adresse, String telephone,
+                  String email, String commentaire, long chiffreAffaires, int nbrEmployes)
+            throws NullPointerException, SaisieException {
         super(compteurIdClient++, raisonSociale, adresse, telephone, email, commentaire);
         setChiffreAffaires(chiffreAffaires);
         setNbrEmployes(nbrEmployes);
@@ -44,7 +46,8 @@ public class Client extends Societe {
         this.nbrEmployes = nbrEmployes;
         }
 
-    /** méthode static parce que methode "tampon" au sein de cette classe, servant à récuperer l'ID dans d'autres classes sans l'incrémentation
+    /** méthode static parce que methode "tampon" au sein de cette classe, servant à récuperer l'ID
+     * dans d'autres classes sans l'incrémentation
      *
      * @return compteurIdClient
      */

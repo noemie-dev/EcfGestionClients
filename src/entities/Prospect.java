@@ -21,7 +21,9 @@ public class Prospect extends Societe {
     }
 
 // constructeur qui reprend les paramètres de l'objet mère Société et ajoute les paramètres propres à l'objet Prospect
-    public Prospect(String raisonSociale, Adresse adresse, String telephone, String email, String commentaire, String dateProspect, String interetProspect) throws NullPointerException, SaisieException {
+    public Prospect(String raisonSociale, Adresse adresse, String telephone,
+                    String email, String commentaire, LocalDate dateProspect, OuiNon interetProspect)
+            throws NullPointerException, SaisieException {
         super(compteurIdProspect++, raisonSociale, adresse, telephone, email, commentaire);
         setDateProspection(dateProspect);
         setInteretProspect(interetProspect);
@@ -34,12 +36,8 @@ public class Prospect extends Societe {
     }
 
     // setter qui contrôle l'entrée en string de la date et la convertit en LocalDate, en respectant un pattern
-    public void setDateProspection(String dateProspect) throws SaisieException {
-        try {
-            this.dateProspection = LocalDate.parse(dateProspect, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (DateTimeException e) {
-            throw new SaisieException(e.getMessage());
-        }
+    public void setDateProspection(LocalDate dateProspect) throws SaisieException {
+            this.dateProspection = dateProspect;
     }
 
     public OuiNon getInteretProspect() {
@@ -50,9 +48,9 @@ public class Prospect extends Societe {
      * alors je l'assigne dans la propriété reponseInteret
      * sinon cela renvoie une exception
      */
-    public void setInteretProspect(String interetProspect) throws SaisieException {
+    public void setInteretProspect(OuiNon interetProspect) throws SaisieException {
         try {
-            this.reponseInteret = OuiNon.valueOf(interetProspect.toUpperCase());
+            this.reponseInteret = interetProspect;
         }
         catch (IllegalArgumentException e) {
             throw new SaisieException(e.getMessage());

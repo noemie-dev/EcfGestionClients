@@ -4,11 +4,16 @@ package view;
 import entities.*;
 import utilities.ChoixClientProspect;
 import utilities.ChoixCrud;
+import utilities.OuiNon;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.util.logging.Level;
 
+import static gestionlog.LoggerInit.LOGGER;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 
@@ -108,7 +113,8 @@ public class UiCrud extends JFrame {
         this.choixClasse = choixClientProspect;
         this.choixCrud = ChoixCrud.CREER;
         labelsClientProspect();
-        idTextField.setText(String.valueOf(Client.getCompteurIdClient())); // je recupère l'identifiant dans ma classe Client avec un getter static
+        idTextField.setText(String.valueOf(Client.getCompteurIdClient())); //
+        // je recupère l'identifiant dans ma classe Client avec un getter static
         crudValiderButton.setText(choixCrud.toString());
         listeners();
 
@@ -136,37 +142,39 @@ public class UiCrud extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // en fonction du choix crud, quand on clique sur le bouton de validation, on appelle telle méthode :
-                switch (choixCrud) {
-                    case CREER:
-                        try {
+                try {
+                    switch (choixCrud) {
+                        case CREER:
+
                             validerCreation();
-                        } catch (SaisieException ex) {
-                            JOptionPane.showMessageDialog(null, "Erreur : creation annulée");
-                        }
-                        break;
 
-                    case MODIFIER:
-                        try {
+                            break;
+
+                        case MODIFIER:
                             validerModification();
-                        } catch (SaisieException ex) {
-                            JOptionPane.showMessageDialog(null, "Erreur : modification annulée");
-                        }
-                        break;
+                            break;
 
 
-                    case SUPPRIMER:
-                        try {
+                        case SUPPRIMER:
                             validerSuppression();
-                        } catch (SaisieException ex) {
-                            JOptionPane.showMessageDialog(null, "Erreur : suppression annulée");;
-                        }
-                        break;
+                            break;
+
+                    }
+                    dispose();
+                    UiAccueil2 uiAccueil2 = new UiAccueil2();
+                    uiAccueil2.setVisible(true);
+
+
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Erreur : format de numéro invalide");
+                } catch (DateTimeException ex) {
+                    JOptionPane.showMessageDialog(null, "Erreur : format de date invalide");
+                } catch (Exception ex) {
+                    LOGGER.log(Level.SEVERE, "Crash de l'application", ex);
+                    JOptionPane.showMessageDialog(null, "Erreur : fermeture de l'application");
+                    System.exit(1);
 
                 }
-                dispose();
-                UiAccueil2 uiAccueil2 = new UiAccueil2();
-                uiAccueil2.setVisible(true);
-
             }
         });
     }
@@ -185,7 +193,8 @@ public class UiCrud extends JFrame {
      */
     private void labelsClientProspect() {
         idTextField.setEditable(false);
-        if (client != null || choixClasse == ChoixClientProspect.CLIENT) { // si client n'est pas null ou que ce que je vient de créer est bien un client :
+        if (client != null || choixClasse == ChoixClientProspect.CLIENT) {
+            // si client n'est pas null ou que ce que je vient de créer est bien un client :
             chiffreAffairesLabel.setVisible(true);
             chiffreAffairetextField.setVisible(true);
             nbEmployesLabel.setVisible(true);
@@ -267,12 +276,13 @@ public class UiCrud extends JFrame {
      * @throws SaisieException
      * @throws NullPointerException
      */
-    private void validerCreation() throws SaisieException, NullPointerException { // constructeur avec le contenu des textfields
+    private void validerCreation() { // constructeur avec le contenu des textfields
         try {
             if (choixClasse == ChoixClientProspect.CLIENT) {
                 Clients.getClients().add(new Client(
                         raisonSocTextField.getText(),
-                        new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()),
+                        new Adresse(nbRueTextField.getText(), nomRueTextField.getText(),
+                                codePostalTextField.getText(), villeTextField.getText()),
                         telephoneTextField.getText(),
                         emailTextField.getText(),
                         commTextArea.getText(),
@@ -282,12 +292,13 @@ public class UiCrud extends JFrame {
             } else {
                 Prospects.getProspects().add(new Prospect(
                         raisonSocTextField.getText(),
-                        new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()),
+                        new Adresse(nbRueTextField.getText(), nomRueTextField.getText(),
+                                codePostalTextField.getText(), villeTextField.getText()),
                         telephoneTextField.getText(),
                         emailTextField.getText(),
                         commTextArea.getText(),
-                        dateProspectTextField.getText(),
-                        ouiNonCombobox.getSelectedItem().toString()
+                        LocalDate.parse(dateProspectTextField.getText()),
+                        OuiNon.valueOf(ouiNonCombobox.getSelectedItem().toString())
                 ));
             }
 
@@ -307,11 +318,12 @@ public class UiCrud extends JFrame {
       * @throws SaisieException
      * @throws NullPointerException
      */
-    private void validerModification() throws SaisieException, NullPointerException {
+    private void validerModification() {
         try {
             if (choixClasse == ChoixClientProspect.CLIENT) {
                 client.setRaisonSociale(raisonSocTextField.getText());
-                client.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()));
+                client.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(),
+                        codePostalTextField.getText(), villeTextField.getText()));
                 client.setTelephone(telephoneTextField.getText());
                 client.setEmail(emailTextField.getText());
                 client.setCommentaire(commTextArea.getText());
@@ -319,12 +331,13 @@ public class UiCrud extends JFrame {
                 client.setNbrEmployes(parseInt(nbEmployesTextField.getText()));
             } else if (choixClasse == ChoixClientProspect.PROSPECT) {
                 prospect.setRaisonSociale(raisonSocTextField.getText());
-                prospect.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(), codePostalTextField.getText(), villeTextField.getText()));
+                prospect.setAdresse(new Adresse(nbRueTextField.getText(), nomRueTextField.getText(),
+                        codePostalTextField.getText(), villeTextField.getText()));
                 prospect.setTelephone(telephoneTextField.getText());
                 prospect.setEmail(emailTextField.getText());
                 prospect.setCommentaire(commTextArea.getText());
-                prospect.setDateProspection(dateProspectTextField.getText());
-                prospect.setInteretProspect(ouiNonCombobox.getSelectedItem().toString());
+                prospect.setDateProspection(LocalDate.parse(dateProspectTextField.getText()));
+                prospect.setInteretProspect(OuiNon.valueOf(ouiNonCombobox.getSelectedItem().toString()));
 
             }
             JOptionPane.showMessageDialog(null,"la modification est prise en compte");
@@ -336,13 +349,16 @@ public class UiCrud extends JFrame {
         catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+        catch (DateTimeException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     /** methode pour le bouton valider en fonction du choix d'entité quand une suppression est finie
      *
      * @throws SaisieException
      */
-    private void validerSuppression() throws SaisieException {
+    private void validerSuppression() {
         try {
             int confirmation = JOptionPane.showConfirmDialog(this,
                     "etes vous sûrs de vouloir supprimer cette fiche ? ",
@@ -362,8 +378,8 @@ public class UiCrud extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "suppression annulée");
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage()+"Ne peut pas être nul");
         }
     }
 

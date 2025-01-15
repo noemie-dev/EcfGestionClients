@@ -16,7 +16,7 @@ public class Adresse {
     }
     // constructeur avec tous les paramètres
 
-    public Adresse(String rueNb, String rueNom, String codePostal, String ville) throws  NullPointerException, SaisieException {
+    public Adresse(String rueNb, String rueNom, String codePostal, String ville) throws  SaisieException {
        setRueNb(rueNb);
         setRueNom(rueNom);
         setCodePostal(codePostal);
@@ -28,9 +28,9 @@ public class Adresse {
         return rueNb;
     }
     // ce setter valide que le la valeur n'est ni nulle, ni vide
-    public void setRueNb(String rueNb) throws NullPointerException {
+    public void setRueNb(String rueNb) throws SaisieException  {
         if (rueNb == null ||rueNb.trim().isEmpty()) {
-            throw new NullPointerException();
+            throw new SaisieException("Erreur : ne peut pas être nul");
         }
         this.rueNb = rueNb;
     }
@@ -40,9 +40,9 @@ public class Adresse {
     }
 
     // ce setter valide que le la valeur n'est ni nulle, ni vide
-    public void setRueNom(String rueNom) throws NullPointerException {
+    public void setRueNom(String rueNom) throws SaisieException {
         if (rueNom == null ||rueNom.trim().isEmpty()) {
-            throw new NullPointerException();
+            throw new SaisieException("Erreur : ne peut pas être nul");
         }
         this.rueNom = rueNom;
     }
@@ -51,9 +51,9 @@ public class Adresse {
         return codePostal;
     }
     // ce setter valide que le la valeur n'est ni nulle, ni vide et que le code postal respecte un pattern à 5 chiffres
-    public void setCodePostal(String codePostal) throws NullPointerException, SaisieException {
+    public void setCodePostal(String codePostal) throws SaisieException {
         if (codePostal == null || codePostal.trim().isEmpty()) {
-            throw new NullPointerException();
+            throw new SaisieException("Erreur : ne peut pas être nul");
         }
         if (PATTERN_CODE_POSTAL.matcher(codePostal).matches()) {
             this.codePostal = codePostal;
@@ -65,9 +65,9 @@ public class Adresse {
         return ville;
     }
     // ce setter valide que le la valeur n'est ni nulle, ni vide
-    public void setVille(String ville) throws NullPointerException {
+    public void setVille(String ville) throws SaisieException {
         if (ville == null || ville.trim().isEmpty()) {
-            throw new NullPointerException();
+            throw new SaisieException("Erreur : ne peut pas être nul");
         }
         this.ville = ville;
     }

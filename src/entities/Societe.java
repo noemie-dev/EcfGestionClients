@@ -23,7 +23,8 @@ public abstract class Societe {
 
     // constructeur avec tous les paramètres
 
-    public Societe(int id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire) throws NullPointerException, SaisieException {
+    public Societe(int id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire)
+            throws NullPointerException, SaisieException {
         setId(id);
         setRaisonSociale(raisonSociale);
         setAdresse(adresse);
@@ -47,15 +48,14 @@ public abstract class Societe {
     }
 
     // setter qui teste que la raison sociale ne soit ni nulle, ni vide, ni déjà présente dans une des deux Arraylists
-    public void setRaisonSociale(String raisonSociale) throws NullPointerException, SaisieException {
+    public void setRaisonSociale(String raisonSociale) throws SaisieException {
         if (raisonSociale == null || raisonSociale.trim().isEmpty()) {
-            throw new NullPointerException();
-            // dans méthode à part : ! renvoie un boolean : recup liste client et prospect, puis .stream // fluidifie recherche en faisant sorting avec tableau, .anymatch pour tout chercher, .equalsignorecase fait en sorte d'ignorer la casse
+            throw new SaisieException("Erreur : ne peut pas être nul");
+            /* dans méthode à part : ! renvoie un boolean : recup liste client et prospect, puis .stream
+            *fluidifie recherche en faisant sorting avec tableau, .anymatch pour tout chercher,
+            * .equalsignorecase fait en sorte d'ignorer la casse */
         }
         if (RaisonSocialeClientDoublon(raisonSociale)) {
-            throw new SaisieException("Erreur : Cette raison sociale est déjà enregistrée.");
-        }
-        if (RaisonSocialeProspectDoublon(raisonSociale)) {
             throw new SaisieException("Erreur : Cette raison sociale est déjà enregistrée.");
         }
         else this.raisonSociale = raisonSociale;
@@ -66,9 +66,9 @@ public abstract class Societe {
     }
 
     // setter qui vérifie que l'adresse n'est pas vide avant d'être instanciée
-    public void setAdresse(Adresse adresse) throws NullPointerException {
+    public void setAdresse(Adresse adresse) throws SaisieException {
         if (adresse == null) {
-            throw new NullPointerException();
+            throw new SaisieException("Erreur : ne peut pas être nul");
         }
         this.adresse = adresse;
     }
@@ -80,7 +80,7 @@ public abstract class Societe {
     // setter qui contrôle que le champ téléphone n'est ni nul, ni vide, et respecte le pattern du téléphone
     public void setTelephone(String telephone) throws NullPointerException, SaisieException {
         if (telephone == null || telephone.trim().isEmpty()) {
-            throw new NullPointerException();
+            throw new SaisieException("Erreur : ne peut pas être nul");
         }
         if (PATTERN_TELEPHONE.matcher(telephone).matches()) {
             this.telephone = telephone;
@@ -97,7 +97,7 @@ public abstract class Societe {
     // setter qui contrôle que le champ téléphone n'est ni nul, ni vide, et respecte le pattern du mail
     public void setEmail(String email) throws NullPointerException, SaisieException {
         if (email == null || email.trim().isEmpty()) {
-            throw new NullPointerException();
+            throw new SaisieException("Erreur : ne peut pas être nul");
         }
         if (PATTERN_EMAIL.matcher(email).matches()) {
             this.email = email;
@@ -115,13 +115,16 @@ public abstract class Societe {
         this.commentaire = commentaire;
     }
 
-    // méthodes qui parcourent chaque Arraylist pour vérifier que la raison sociale entrée n'est pas déjà présente dans la liste avant de l'instancier
+    /* méthodes qui parcourent chaque Arraylist pour vérifier que la raison sociale entrée
+    * n'est pas déjà présente dans la liste avant de l'instancier */
     private boolean RaisonSocialeClientDoublon(String raisonSociale) {
-        return Clients.getClients().stream().anyMatch(client -> client.getRaisonSociale().equalsIgnoreCase(raisonSociale) && !client.equals(this));
+        return Clients.getClients().stream().anyMatch(client ->
+                client.getRaisonSociale().equalsIgnoreCase(raisonSociale) && !client.equals(this));
     }
 
     private boolean RaisonSocialeProspectDoublon(String raisonSociale) {
-        return Prospects.getProspects().stream().anyMatch(prospect -> prospect.getRaisonSociale().equalsIgnoreCase(raisonSociale) && !prospect.equals(this));
+        return Prospects.getProspects().stream().anyMatch(prospect ->
+                prospect.getRaisonSociale().equalsIgnoreCase(raisonSociale) && !prospect.equals(this));
     }
 
 
