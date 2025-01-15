@@ -160,9 +160,9 @@ public class UiCrud extends JFrame {
                             break;
 
                     }
-                    dispose();
+                   /* dispose();
                     UiAccueil2 uiAccueil2 = new UiAccueil2();
-                    uiAccueil2.setVisible(true);
+                    uiAccueil2.setVisible(true); */
 
 
                 } catch (NumberFormatException ex) {
@@ -380,8 +380,10 @@ public class UiCrud extends JFrame {
             }
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, e.getMessage()+"Ne peut pas être nul");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-    }
+        }
 
 }
 
