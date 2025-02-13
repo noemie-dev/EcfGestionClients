@@ -61,14 +61,7 @@ public class Main {
                     new Adresse("5", "liberation", "57670", "bobville"),
                     "+3385562012", "email@email.com", "non",
                     LocalDate.parse("25/07/1995"), OuiNon.NON);
-            Clients.clients.add(client);
-            Clients.clients.add(client2);
-            Clients.clients.add(client3);
-            Clients.clients.add(client4);
-            Prospects.prospects.add(prospect);
-            Prospects.ajouterProspect(prospect2);
-            Prospects.ajouterProspect(prospect3);
-            Prospects.ajouterProspect(prospect4);
+
 
         }
         catch (NullPointerException e) {

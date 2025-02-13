@@ -2,9 +2,7 @@ package view;
 
 
 import entities.Client;
-import entities.Clients;
 import entities.Prospect;
-import entities.Prospects;
 import utilities.ChoixClientProspect;
 
 import java.awt.event.*;
@@ -13,7 +11,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import static entities.Clients.clients;
-import static entities.Prospects.prospects;
 import static utilities.Regex.DATE_FORMATTER;
 
 /** interface affichant la liste des clients et des prospects, non modifiable
