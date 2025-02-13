@@ -9,7 +9,7 @@ import static utilities.Regex.PATTERN_EMAIL;
  *  pour les classes filles Client et Prospect, auxquelles sont ajoutées des variables propres aux besoins de ces classes.
  */
 public abstract class Societe {
-    private int id; // identifiant de la société
+    private Integer id; // identifiant de la société
     private String raisonSociale;
     private Adresse adresse;
     private String telephone;
@@ -23,7 +23,7 @@ public abstract class Societe {
 
     // constructeur avec tous les paramètres
 
-    public Societe(int id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire)
+    public Societe(Integer id, String raisonSociale, Adresse adresse, String telephone, String email, String commentaire)
             throws NullPointerException, SaisieException {
         setId(id);
         setRaisonSociale(raisonSociale);
@@ -39,7 +39,7 @@ public abstract class Societe {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

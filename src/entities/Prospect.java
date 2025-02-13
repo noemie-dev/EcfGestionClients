@@ -11,7 +11,7 @@ import utilities.OuiNon;
 /** classe fille de la classe abstraite société, classe soeur de Client. Gère les objets Prospect.
  */
 public class Prospect extends Societe {
-    private static int compteurIdProspect = 1;
+    private static Integer compteurIdProspect = 1;
    private String dateProspect;
     private LocalDate dateProspection;
     private OuiNon reponseInteret;
@@ -37,7 +37,7 @@ public class Prospect extends Societe {
 
     // setter qui contrôle l'entrée en string de la date et la convertit en LocalDate, en respectant un pattern
     public void setDateProspection(LocalDate dateProspect) throws SaisieException {
-            this.dateProspection = dateProspect;
+            this .dateProspection = dateProspect;
     }
 
     public OuiNon getInteretProspect() {
