@@ -1,3 +1,4 @@
+import DAO.Connection;
 import entities.*;
 import gestionlog.LoggerInit;
 import utilities.OuiNon;
@@ -22,7 +23,20 @@ public class Main {
             System.exit(1);
         }
 
-        UiAccueil2 uiAccueil2 = new UiAccueil2();
+        Connection c1 = Connection.getInstance(); // Doit créer une nouvelle instance
+        Connection c2 = Connection.getInstance(); // Doit retourner la même instance
+
+        // Vérifier si c1 et c2 pointent bien vers la même instance
+        if (c1 == c2) {
+            System.out.println("Les deux objets sont identiques (singleton fonctionne).");
+        } else {
+            System.out.println("Erreur : deux instances différentes existent !");
+        }
+    }
+}
+
+
+    /*    UiAccueil2 uiAccueil2 = new UiAccueil2();
         uiAccueil2.setVisible(true);
         remplissage();
 
@@ -78,3 +92,4 @@ public class Main {
         }
     }
 }
+*/
