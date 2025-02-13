@@ -4,6 +4,7 @@ import utilities.OuiNon;
 import view.UiAccueil2;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -13,7 +14,6 @@ import static gestionlog.LoggerInit.LOGGER;
 
 public class Main {
     public static void main(String[] args) {
-
         try {
             new LoggerInit().initFileLogger();
             LOGGER.log(Level.INFO, "Lancement de l'application");
@@ -77,5 +77,4 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
-
 }
