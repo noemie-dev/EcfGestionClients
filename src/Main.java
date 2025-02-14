@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 
 import static DAO.ConnexionManager.getConnection;
+import static DAO.DaoClient.createClient;
 import static gestionlog.LoggerInit.LOGGER;
 
 
@@ -26,6 +27,12 @@ public class Main {
         } catch (SQLException e) {
             System.out.println(e.getMessage());;
         }
+
+        try {
+        DaoClient.createClient(getConnection(), "ecf_bdd", 3, "Google", "12", "Rue Exemple", "75000", "Paris", "0123456789", "example@mail.com", "Commentaires d'exemple", "10000", "50");
+    }
+        catch (SQLException e) {
+        System.out.println(e.getMessage());;}
     }
 }
 
