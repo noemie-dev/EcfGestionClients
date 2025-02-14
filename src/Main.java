@@ -1,7 +1,9 @@
 
+import DAO.DaoClient;
 import gestionlog.LoggerInit;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 
 import static DAO.ConnexionManager.getConnection;
@@ -19,6 +21,11 @@ public class Main {
         }
 
         System.out.println(getConnection());
+        try {
+            DaoClient.viewTable(getConnection(),"ecf_bdd");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());;
+        }
     }
 }
 
