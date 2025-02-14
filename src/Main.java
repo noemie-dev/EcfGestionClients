@@ -22,7 +22,7 @@ public class Main {
 
         System.out.println(getConnection());
         try {
-            DaoClient.viewTable(getConnection(),"ecf_bdd");
+            DaoClient.findall(getConnection(),"ecf_bdd");
         } catch (SQLException e) {
             System.out.println(e.getMessage());;
         }

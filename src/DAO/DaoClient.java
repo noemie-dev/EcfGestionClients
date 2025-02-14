@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 
 public class DaoClient {
-    public static void viewTable(Connection con, String dbName) throws SQLException {
+    public static void findall(Connection con, String dbName) throws SQLException {
         PreparedStatement ps = null;
         String query = "select * from " + dbName + ".client";
         try {
