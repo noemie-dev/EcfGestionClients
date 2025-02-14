@@ -28,12 +28,20 @@ public class Main {
             System.out.println(e.getMessage());;
         }
 
-        try {
+       /* try {
         DaoClient.createClient(getConnection(), "ecf_bdd", 3, "Google", "12", "Rue Exemple", "75000", "Paris", "0123456789", "example@mail.com", "Commentaires d'exemple", "10000", "50");
     }
         catch (SQLException e) {
-        System.out.println(e.getMessage());;}
+        System.out.println(e.getMessage());;}*/
+
+        try {
+            DaoClient.findClientByRaisonSociale(getConnection(),"ecf_bdd", "Apple");
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());;
+        }
     }
+
 }
 
 
