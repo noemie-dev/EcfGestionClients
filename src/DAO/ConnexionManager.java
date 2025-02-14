@@ -11,10 +11,10 @@ import java.util.Properties;
 
 
 public class ConnexionManager {
-    private static Connection connection = null;
+    private static Connection connexion = null;
 
     public static Connection getConnection() {
-        if (connection == null) {
+        if (connexion == null) {
             try {
                 final Properties dataProperties = new Properties();
                 File fichier = new File("database.properties");
@@ -22,7 +22,7 @@ public class ConnexionManager {
                 dataProperties.load(input);
                 System.out.println("fichier ok");
 
-                connection = DriverManager.getConnection(
+                connexion = DriverManager.getConnection(
                         dataProperties.getProperty("url"),
                         dataProperties.getProperty("login"),
                         dataProperties.getProperty("password")
@@ -33,7 +33,7 @@ public class ConnexionManager {
 //                throw new Exception("Erreur de connexion");
             }
         }
-        System.out.println(connection);
-            return connection;
+        System.out.println(connexion);
+            return connexion;
         }
     }
