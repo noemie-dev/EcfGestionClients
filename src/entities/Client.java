@@ -5,7 +5,7 @@ package entities;
 public class Client extends Societe {
     private static Integer compteurIdClient = 1;
     private long chiffreAffaires;
-    private int nbrEmployes;
+    private Integer nbrEmployes;
 
     // rétablissement du constructeur implicite
     public Client() {
@@ -14,7 +14,7 @@ public class Client extends Societe {
     // lors de l'instanciation d'un nouvel objet client, l'id actuel est attribué, puis incrémenté pour le prochain objet instancié.
 
     public Client(String raisonSociale, Adresse adresse, String telephone,
-                  String email, String commentaire, long chiffreAffaires, int nbrEmployes)
+                  String email, String commentaire, long chiffreAffaires, Integer nbrEmployes)
             throws NullPointerException, SaisieException {
         super(compteurIdClient++, raisonSociale, adresse, telephone, email, commentaire);
         setChiffreAffaires(chiffreAffaires);
@@ -34,12 +34,12 @@ public class Client extends Societe {
         this.chiffreAffaires = chiffreAffaires;
     }
 
-    public int getNbrEmployes() {
+    public Integer getNbrEmployes() {
         return nbrEmployes;
     }
 
     // ce setter valide que le la valeur n'est ni nulle, ni vide
-    public void setNbrEmployes (int nbrEmployes) throws SaisieException {
+    public void setNbrEmployes (Integer nbrEmployes) throws SaisieException {
             if (nbrEmployes <= 0) {
                 throw new SaisieException("nbrEmployes invalide");
             }
@@ -51,7 +51,7 @@ public class Client extends Societe {
      *
      * @return compteurIdClient
      */
-        public static int getCompteurIdClient() {
+        public static Integer getCompteurIdClient() {
         return compteurIdClient;
         }
 
