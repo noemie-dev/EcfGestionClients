@@ -1,11 +1,11 @@
 package DAO;
-import entities.Adresse;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import entities.Client;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class DaoClient {
@@ -93,7 +93,7 @@ public class DaoClient {
                 String commentaires = rs.getString("commentaires");
                 String chiffreAffaires = rs.getString("chiffreAffaires");
                 String nbrEmployes = rs.getString("nbrEmployes");
-                System.out.println(rs);
+                System.out.println(mail);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,5 +105,45 @@ public class DaoClient {
         }
 
     }
-}
+
+        public static void saveEmail(Connection connexion, HashMap<Integer, String> emailMap) throws SQLException {
+            PreparedStatement updateEmailStmt = null;
+
+            String updateEmailQuery = "UPDATE Client SET mail = ? WHERE idClient = ?";
+
+            try {
+                connexion.setAutoCommit(false);
+                updateEmailStmt = connexion.prepareStatement(updateEmailQuery);
+
+                for (Map.Entry<Integer, String> entry : emailMap.entrySet()) {
+                    updateEmailStmt.setString(1, entry.getValue());
+                    updateEmailStmt.setInt(2, entry.getKey());
+                    updateEmailStmt.executeUpdate();
+                    System.out.println("le mail a été modifié");
+                }
+
+                connexion.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Erreur de PS : " + e.getMessage());
+                if (connexion != null) {
+                    try {
+                        System.err.println("Transaction is being rolled back");
+                        connexion.rollback();
+                    } catch (SQLException excep) {
+                        excep.printStackTrace();
+                        System.out.println("Erreur de connexion DAOClient" + e.getMessage());
+                    }
+                }
+            } finally {
+                if (updateEmailStmt != null) {
+                    updateEmailStmt.close();
+                }
+                connexion.setAutoCommit(true);
+            }
+        }
+    }
+
+
+
 

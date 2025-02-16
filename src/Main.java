@@ -4,6 +4,7 @@ import gestionlog.LoggerInit;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 import static DAO.ConnexionManager.getConnection;
@@ -23,26 +24,38 @@ public class Main {
 
         System.out.println(getConnection());
         try {
-            DaoClient.findall(getConnection(),"ecf_bdd");
+            DaoClient.findall(getConnection(), "ecf_bdd");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
+            ;
         }
 
-       /* try {
+        try {
         DaoClient.createClient(getConnection(), "ecf_bdd", 3, "Google", "12", "Rue Exemple", "75000", "Paris", "0123456789", "example@mail.com", "Commentaires d'exemple", "10000", "50");
     }
         catch (SQLException e) {
-        System.out.println(e.getMessage());;}*/
+        System.out.println(e.getMessage());;}
 
         try {
-            DaoClient.findClientByRaisonSociale(getConnection(),"ecf_bdd", "Apple");
+            DaoClient.findClientByRaisonSociale(getConnection(), "ecf_bdd", "Apple");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            ;
         }
-        catch (SQLException e) {
+
+
+        HashMap<Integer, String> emailMap = new HashMap<>();
+        emailMap.put(2, "nouveau.mail@example.com"); // Modifier l'email du client ID 2
+        try {
+            DaoClient.saveEmail(getConnection(), emailMap);
+        } catch (SQLException e) {
             System.out.println(e.getMessage());;
         }
     }
-
 }
+
+
+
 
 
     /*    UiAccueil2 uiAccueil2 = new UiAccueil2();
