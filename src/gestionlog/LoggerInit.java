@@ -15,6 +15,9 @@ public class LoggerInit {
         fh = new FileHandler("logs/LogEcfGestionClients.log", true);
         LOGGER.setUseParentHandlers(false);
         LOGGER.addHandler(fh);
-        fh.setFormatter(new FormatterLog());
+        fh.setFormatter(new FormatterLog());}
+
+        public static void logError(String message, Exception e) {
+            LOGGER.severe(message + " | Exception: " + e.getMessage());
     }
 }

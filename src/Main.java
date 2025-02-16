@@ -5,6 +5,7 @@ import gestionlog.LoggerInit;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 
 import static DAO.ConnexionManager.getConnection;
@@ -30,11 +31,11 @@ public class Main {
             ;
         }
 
-        try {
+       /* try {
         DaoClient.createClient(getConnection(), "ecf_bdd", 3, "Google", "12", "Rue Exemple", "75000", "Paris", "0123456789", "example@mail.com", "Commentaires d'exemple", "10000", "50");
     }
         catch (SQLException e) {
-        System.out.println(e.getMessage());;}
+        System.out.println(e.getMessage());;}*/
 
         try {
             DaoClient.findClientByRaisonSociale(getConnection(), "ecf_bdd", "Apple");
@@ -50,6 +51,14 @@ public class Main {
             DaoClient.saveEmail(getConnection(), emailMap);
         } catch (SQLException e) {
             System.out.println(e.getMessage());;
+        }
+
+        List<Integer> clientIds = List.of(3); // Liste des ID à supprimer
+
+        try {
+            DaoClient.deleteClient(getConnection(), clientIds);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

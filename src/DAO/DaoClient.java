@@ -1,10 +1,13 @@
 package DAO;
 
+import gestionlog.LoggerInit;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -33,6 +36,7 @@ public class DaoClient {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("erreur de PS" + e.getMessage());
+            LoggerInit.logError("Erreur de méthode findAll DAOClient",e);
         } finally {
             if (ps != null) {
                 ps.close();
@@ -67,6 +71,7 @@ public class DaoClient {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erreur de PS : " + e.getMessage());
+            LoggerInit.logError("Erreur de méthode createClient DAOClient",e);
         } finally {
             if (ps != null) {
                 ps.close();
@@ -98,6 +103,7 @@ public class DaoClient {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erreur de PS : " + e.getMessage());
+            LoggerInit.logError("Erreur de méthode findClientByRaisonSociale DAOClient",e);
         } finally {
             if (ps != null) {
                 ps.close();
@@ -120,12 +126,14 @@ public class DaoClient {
                     updateEmailStmt.setInt(2, entry.getKey());
                     updateEmailStmt.executeUpdate();
                     System.out.println("le mail a été modifié");
+
                 }
 
                 connexion.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Erreur de PS : " + e.getMessage());
+                LoggerInit.logError("Erreur de méthode saveEmail DAOClient",e);
                 if (connexion != null) {
                     try {
                         System.err.println("Transaction is being rolled back");
@@ -133,6 +141,7 @@ public class DaoClient {
                     } catch (SQLException excep) {
                         excep.printStackTrace();
                         System.out.println("Erreur de connexion DAOClient" + e.getMessage());
+                        LoggerInit.logError("Erreur de connexion DA0Client",e);
                     }
                 }
             } finally {
@@ -142,7 +151,42 @@ public class DaoClient {
                 connexion.setAutoCommit(true);
             }
         }
+
+    public static void deleteClient(Connection connexion, List<Integer> clientIds) throws SQLException {
+        PreparedStatement deleteStmt = null;
+        String deleteQuery = "DELETE FROM Client WHERE idClient = ?";
+
+        try {
+            connexion.setAutoCommit(false);
+            deleteStmt = connexion.prepareStatement(deleteQuery);
+
+            for (Integer clientId : clientIds) {
+                deleteStmt.setInt(1, clientId);
+                deleteStmt.executeUpdate();
+                System.out.println("client supprimé ok");
+            }
+
+            connexion.commit();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression : " + e.getMessage());
+            LoggerInit.logError("Erreur lors de la suppression d'un client",e);
+            if (connexion != null) {
+                try {
+                    System.out.println("Transaction is being rolled back");
+                    connexion.rollback();
+                } catch (SQLException excep) {
+                    excep.printStackTrace();
+                }
+            }
+        } finally {
+            if (deleteStmt != null) {
+                deleteStmt.close();
+            }
+            connexion.setAutoCommit(true);
+        }
     }
+}
+
 
 
 
