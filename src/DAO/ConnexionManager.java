@@ -1,5 +1,7 @@
 package DAO;
 
+import gestionlog.LoggerInit;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,6 +32,7 @@ public class ConnexionManager {
             } catch (IOException | SQLException e ) {
                 e.printStackTrace();
                 System.out.println("Erreur de connexion" + e.getMessage());
+                LoggerInit.logError("Erreur de connexion avec la base de donnees",e);
 //                throw new Exception("Erreur de connexion");
             }
         }
