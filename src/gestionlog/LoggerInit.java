@@ -17,4 +17,8 @@ public class LoggerInit {
         LOGGER.addHandler(fh);
         fh.setFormatter(new FormatterLog());
     }
+
+    public static void logError (String message, Exception e) {
+        LOGGER.severe(message + e.getMessage());
+    }
 }
