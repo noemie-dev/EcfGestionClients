@@ -1,19 +1,20 @@
-import entities.*;
+
+import DAO.DaoClient;
 import gestionlog.LoggerInit;
-import utilities.OuiNon;
-import view.UiAccueil2;
 
 import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDate;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 
+import static DAO.ConnexionManager.getConnection;
+import static DAO.DaoClient.createClient;
 import static gestionlog.LoggerInit.LOGGER;
 
 
 public class Main {
     public static void main(String[] args) {
-
         try {
             new LoggerInit().initFileLogger();
             LOGGER.log(Level.INFO, "Lancement de l'application");
@@ -22,7 +23,51 @@ public class Main {
             System.exit(1);
         }
 
-        UiAccueil2 uiAccueil2 = new UiAccueil2();
+        System.out.println(getConnection());
+        try {
+            DaoClient.findall(getConnection(), "ecf_bdd");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            ;
+        }
+
+       /* try {
+        DaoClient.createClient(getConnection(), "ecf_bdd", 3, "Google", "12", "Rue Exemple", "75000", "Paris", "0123456789", "example@mail.com", "Commentaires d'exemple", "10000", "50");
+    }
+        catch (SQLException e) {
+        System.out.println(e.getMessage());;}*/
+
+        try {
+            DaoClient.findClientByRaisonSociale(getConnection(), "ecf_bdd", "Apple");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            ;
+        }
+
+
+        HashMap<Integer, String> emailMap = new HashMap<>();
+        emailMap.put(2, "nouveau.mail@example.com"); // Modifier l'email du client ID 2
+        try {
+            DaoClient.saveEmail(getConnection(), emailMap);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());;
+        }
+
+        List<Integer> clientIds = List.of(3); // Liste des ID à supprimer
+
+        try {
+            DaoClient.deleteClient(getConnection(), clientIds);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+
+
+
+    /*    UiAccueil2 uiAccueil2 = new UiAccueil2();
         uiAccueil2.setVisible(true);
         remplissage();
 
@@ -61,14 +106,7 @@ public class Main {
                     new Adresse("5", "liberation", "57670", "bobville"),
                     "+3385562012", "email@email.com", "non",
                     LocalDate.parse("25/07/1995"), OuiNon.NON);
-            Clients.clients.add(client);
-            Clients.clients.add(client2);
-            Clients.clients.add(client3);
-            Clients.clients.add(client4);
-            Prospects.prospects.add(prospect);
-            Prospects.ajouterProspect(prospect2);
-            Prospects.ajouterProspect(prospect3);
-            Prospects.ajouterProspect(prospect4);
+
 
         }
         catch (NullPointerException e) {
@@ -84,5 +122,5 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
-
 }
+*/

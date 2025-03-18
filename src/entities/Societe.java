@@ -55,9 +55,6 @@ public abstract class Societe {
             *fluidifie recherche en faisant sorting avec tableau, .anymatch pour tout chercher,
             * .equalsignorecase fait en sorte d'ignorer la casse */
         }
-        if (RaisonSocialeClientDoublon(raisonSociale)) {
-            throw new SaisieException("Erreur : Cette raison sociale est déjà enregistrée.");
-        }
         else this.raisonSociale = raisonSociale;
     }
 
@@ -115,17 +112,7 @@ public abstract class Societe {
         this.commentaire = commentaire;
     }
 
-    /* méthodes qui parcourent chaque Arraylist pour vérifier que la raison sociale entrée
-    * n'est pas déjà présente dans la liste avant de l'instancier */
-    private boolean RaisonSocialeClientDoublon(String raisonSociale) {
-        return Clients.getClients().stream().anyMatch(client ->
-                client.getRaisonSociale().equalsIgnoreCase(raisonSociale) && !client.equals(this));
-    }
 
-    private boolean RaisonSocialeProspectDoublon(String raisonSociale) {
-        return Prospects.getProspects().stream().anyMatch(prospect ->
-                prospect.getRaisonSociale().equalsIgnoreCase(raisonSociale) && !prospect.equals(this));
-    }
 
 
 
