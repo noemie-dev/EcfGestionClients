@@ -1,6 +1,8 @@
 package view;
 
 
+import dao.DaoClient;
+import dao.ProjetDaoException;
 import entities.*;
 import utilities.ChoixClientProspect;
 import utilities.ChoixCrud;
@@ -9,6 +11,7 @@ import utilities.OuiNon;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -276,10 +279,22 @@ public class UiCrud extends JFrame {
      * @throws SaisieException
      * @throws NullPointerException
      */
-    private void validerCreation() { // constructeur avec le contenu des textfields
+    private void validerCreation() throws ProjetDaoException { // constructeur avec le contenu des textfields
         try {
             if (choixClasse == ChoixClientProspect.CLIENT) {
-                Clients.getClients().add(new Client(
+                new DaoClient().createClient(
+                        raisonSocTextField.getText(),
+                       nbRueTextField.getText(), nomRueTextField.getText(),
+                                codePostalTextField.getText(), villeTextField.getText(),
+                        telephoneTextField.getText(),
+                        emailTextField.getText(),
+                        commTextArea.getText(),
+                        chiffreAffairetextField.getText(),
+                        nbEmployesTextField.getText()
+
+
+                );
+               /* Clients.getClients().add(new Client(
                         raisonSocTextField.getText(),
                         new Adresse(nbRueTextField.getText(), nomRueTextField.getText(),
                                 codePostalTextField.getText(), villeTextField.getText()),
@@ -288,7 +303,7 @@ public class UiCrud extends JFrame {
                         commTextArea.getText(),
                         parseLong(chiffreAffairetextField.getText()),
                         parseInt(nbEmployesTextField.getText())
-                ));
+                ));*/
             } else {
                 Prospects.getProspects().add(new Prospect(
                         raisonSocTextField.getText(),
@@ -310,6 +325,8 @@ public class UiCrud extends JFrame {
         }
         catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (SQLException e) {
+            throw new ProjetDaoException(e.getMessage(),5);
         }
     }
 

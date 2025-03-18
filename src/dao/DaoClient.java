@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static dao.ConnectionManager.getConnection;
+
 public class DaoClient {
 
         public static void findall(Connection con, String dbName) throws SQLException {
@@ -44,27 +46,27 @@ public class DaoClient {
         }
 
 
-        public static void createClient(Connection connexion, String dbName, Integer idClient, String raisonSociale,
+        public void createClient( String raisonSociale,
                                         String rueNb, String rueNom, String codePostal, String ville, String telephone,
                                         String mail, String commentaires, String chiffreAffaires,
                                         String nbrEmployes) throws SQLException {
             PreparedStatement ps = null;
-            String query = "INSERT INTO " + dbName + ".client " +
-                    "(idClient, raisonSociale, rueNb, rueNom, codePostal, ville, telephone," +
-                    " mail, commentaires, chiffreAffaires, nbrEmployes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO " + "client " +
+                    "(raisonSociale, rueNb, rueNom, codePostal, ville, telephone," +
+                    " mail, commentaires, chiffreAffaires, nbrEmployes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            Connection connexion = getConnection();
             try {
                 ps = connexion.prepareStatement(query);
-                ps.setInt(1, idClient);
-                ps.setString(2, raisonSociale);
-                ps.setString(3, rueNb);
-                ps.setString(4, rueNom);
-                ps.setString(5, codePostal);
-                ps.setString(6, ville);
-                ps.setString(7, telephone);
-                ps.setString(8, mail);
-                ps.setString(9, commentaires);
-                ps.setString(10, chiffreAffaires);
-                ps.setString(11, nbrEmployes);
+                ps.setString(1, raisonSociale);
+                ps.setString(2, rueNb);
+                ps.setString(3, rueNom);
+                ps.setString(4, codePostal);
+                ps.setString(5, ville);
+                ps.setString(6, telephone);
+                ps.setString(7, mail);
+                ps.setString(8, commentaires);
+                ps.setString(9, chiffreAffaires);
+                ps.setString(10, nbrEmployes);
                 ps.executeUpdate();
                 System.out.println("Nouvel enregistrement client créé avec succès.");
             } catch (SQLException e) {
